@@ -1,0 +1,479 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101010">
+<title>Sauce Giver — Find Your Sauce</title>
+
+<style>
+:root {
+  --bg: #101010;
+  --card: #191919;
+  --text: #f5f5f5;
+  --muted: #999;
+  --accent: #c8fff5;
+  --border: rgba(255,255,255,.12);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* Background video */
+
+.background-video {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  background: #101010;
+}
+
+.background-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .30;
+}
+
+.background-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(16,16,16,.45),
+    rgba(16,16,16,.88) 40%,
+    #101010 85%
+  );
+}
+
+/* Navigation */
+
+header {
+  width: 100%;
+  padding: 24px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.logo span {
+  color: var(--accent);
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--text);
+  font-size: 13px;
+  margin-left: 22px;
+  opacity: .8;
+}
+
+nav a:hover {
+  opacity: 1;
+}
+
+/* Hero */
+
+.hero {
+  min-height: 390px;
+  padding: 100px 7% 85px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.eyebrow {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--accent);
+  margin-bottom: 22px;
+}
+
+.hero h1 {
+  font-size: clamp(48px, 9vw, 100px);
+  line-height: .95;
+  letter-spacing: -6px;
+  font-weight: 800;
+  max-width: 850px;
+}
+
+.hero h1 span {
+  color: var(--accent);
+}
+
+.hero p {
+  max-width: 430px;
+  margin-top: 25px;
+  color: #c1c1c1;
+  font-size: 15px;
+}
+
+/* Main section */
+
+main {
+  padding: 0 7% 90px;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 15px;
+  margin-bottom: 28px;
+}
+
+.section-heading h2 {
+  font-size: 27px;
+  letter-spacing: -1px;
+}
+
+.section-heading p {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.sauce-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.sauce-card {
+  min-width: 0;
+  min-height: 145px;
+  padding: 23px;
+  background: rgba(25,25,25,.85);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  transition: border-color .2s, transform .2s;
+}
+
+.sauce-card:hover {
+  border-color: rgba(200,255,69,.6);
+  transform: translateY(-2px);
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.card-number {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+.status {
+  font-size: 10px;
+  color: var(--accent);
+  border: 1px solid rgba(200,255,69,.3);
+  padding: 4px 7px;
+  border-radius: 3px;
+}
+
+.sauce-card h3 {
+  font-size: 19px;
+  letter-spacing: -.5px;
+  overflow-wrap: anywhere;
+}
+
+.sauce-card p {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 5px;
+}
+
+.watch {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-start;
+  gap: 10px;
+  padding: 10px 17px;
+  background: var(--accent);
+  color: #111;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 800;
+  border-radius: 3px;
+  transition: background .2s;
+}
+
+.watch:hover {
+  background: #e0ff91;
+}
+
+.watch.disabled {
+  background: #333;
+  color: #888;
+  cursor: not-allowed;
+}
+
+/* Footer */
+
+footer {
+  padding: 25px 7%;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+footer a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* Responsive */
+
+@media (min-width: 900px) {
+  .sauce-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1250px) {
+  .sauce-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 550px) {
+  header {
+    padding: 20px 5%;
+  }
+
+  nav a {
+    margin-left: 12px;
+    font-size: 11px;
+  }
+
+  .hero {
+    min-height: 350px;
+    padding: 80px 5%;
+  }
+
+  .hero h1 {
+    letter-spacing: -3px;
+  }
+
+  main {
+    padding: 0 5% 60px;
+  }
+
+  .sauce-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sauce-card {
+    min-height: 135px;
+  }
+
+  .section-heading h2 {
+    font-size: 23px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Replace this with your own publicly accessible background video URL -->
+<div class="background-video">
+  <video autoplay muted loop playsinline>
+    <source src="https://digiskills52.wordpress.com/wp-content/uploads/2026/10/blackfire-s-honeymoon-hinca-p_1080p.mp4" type="video/mp4">
+  </video>
+</div>
+<div class="background-overlay"></div>
+
+<header>
+  <a class="logo" href="#" style="color:inherit;text-decoration:none">
+    SAUCE<span>GIVER.</span>
+  </a>
+
+  <nav>
+    <a href="#sauces">Explore</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<section class="hero" id="about">
+  <div class="eyebrow">Your source. Your next move♡.</div>
+
+  <h1>FIND YOUR<br><span>SAUCE.</span></h1>
+
+  <p>
+    A curated collection of videos, Try not to cum in 30 minutes.
+  </p>
+</section>
+
+<main id="sauces">
+  <div class="section-heading">
+    <div>
+      <div class="eyebrow">explore</div>
+      <h2>All the sauce.</h2>
+    </div>
+    <p id="count">50 sections</p>
+  </div>
+
+  <div class="sauce-grid" id="sauceGrid"></div>
+</main>
+
+<footer>
+  <span>© <span id="year"></span> Sauce Giver.</span>
+  <a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Back to top ↑</a>
+</footer>
+
+<script>
+/*
+=====================================================
+SAUCE GIVER SETTINGS
+=====================================================
+
+1. Replace YOUR_BACKGROUND_VIDEO_URL.mp4 above.
+2. Add your video links below.
+3. Keep each video URL publicly accessible.
+4. Unconfigured sections show "Coming soon".
+*/
+
+const sauces = [
+  { title: "Sauce 01", description: "Explore the first drop.", url: "" },
+  { title: "Sauce 02", description: "Explore the second drop.", url: "" },
+  { title: "Sauce 03", description: "Explore the third drop.", url: "" },
+  { title: "Sauce 04", description: "Explore the fourth drop.", url: "" },
+  { title: "Sauce 05", description: "Explore the fifth drop.", url: "" },
+  { title: "Sauce 06", description: "Discover something new.", url: "" },
+  { title: "Sauce 07", description: "Discover something new.", url: "" },
+  { title: "Sauce 08", description: "Discover something new.", url: "" },
+  { title: "Sauce 09", description: "Discover something new.", url: "" },
+  { title: "Sauce 10", description: "Discover something new.", url: "" },
+  { title: "Sauce 11", description: "A new video awaits.", url: "" },
+  { title: "Sauce 12", description: "A new video awaits.", url: "" },
+  { title: "Sauce 13", description: "A new video awaits.", url: "" },
+  { title: "Sauce 14", description: "A new video awaits.", url: "" },
+  { title: "Sauce 15", description: "A new video awaits.", url: "" },
+  { title: "Sauce 16", description: "Watch the latest drop.", url: "" },
+  { title: "Sauce 17", description: "Watch the latest drop.", url: "" },
+  { title: "Sauce 18", description: "Watch the latest drop.", url: "" },
+  { title: "Sauce 19", description: "Watch the latest drop.", url: "" },
+  { title: "Sauce 20", description: "Watch the latest drop.", url: "" },
+  { title: "Sauce 21", description: "Find your next inspiration.", url: "" },
+  { title: "Sauce 22", description: "Find your next inspiration.", url: "" },
+  { title: "Sauce 23", description: "Find your next inspiration.", url: "" },
+  { title: "Sauce 24", description: "Find your next inspiration.", url: "" },
+  { title: "Sauce 25", description: "Find your next inspiration.", url: "" },
+  { title: "Sauce 26", description: "More ideas. More sauce.", url: "" },
+  { title: "Sauce 27", description: "More ideas. More sauce.", url: "" },
+  { title: "Sauce 28", description: "More ideas. More sauce.", url: "" },
+  { title: "Sauce 29", description: "More ideas. More sauce.", url: "" },
+  { title: "Sauce 30", description: "More ideas. More sauce.", url: "" },
+  { title: "Sauce 31", description: "Keep exploring.", url: "" },
+  { title: "Sauce 32", description: "Keep exploring.", url: "" },
+  { title: "Sauce 33", description: "Keep exploring.", url: "" },
+  { title: "Sauce 34", description: "Keep exploring.", url: "" },
+  { title: "Sauce 35", description: "Keep exploring.", url: "" },
+  { title: "Sauce 36", description: "Your next watch is here.", url: "" },
+  { title: "Sauce 37", description: "Your next watch is here.", url: "" },
+  { title: "Sauce 38", description: "Your next watch is here.", url: "" },
+  { title: "Sauce 39", description: "Your next watch is here.", url: "" },
+  { title: "Sauce 40", description: "Your next watch is here.", url: "" },
+  { title: "Sauce 41", description: "The collection continues.", url: "" },
+  { title: "Sauce 42", description: "The collection continues.", url: "" },
+  { title: "Sauce 43", description: "The collection continues.", url: "" },
+  { title: "Sauce 44", description: "The collection continues.", url: "" },
+  { title: "Sauce 45", description: "The collection continues.", url: "" },
+  { title: "Sauce 46", description: "One more to explore.", url: "" },
+  { title: "Sauce 47", description: "One more to explore.", url: "" },
+  { title: "Sauce 48", description: "One more to explore.", url: "" },
+  { title: "Sauce 49", description: "One more to explore.", url: "" },
+  { title: "Sauce 50", description: "The final drop. For now.", url: "" }
+];
+
+const grid = document.getElementById("sauceGrid");
+
+sauces.forEach((sauce, index) => {
+  const card = document.createElement("article");
+  card.className = "sauce-card";
+
+  const top = document.createElement("div");
+  top.className = "card-top";
+
+  const number = document.createElement("span");
+  number.className = "card-number";
+  number.textContent = "#" + String(index + 1).padStart(2, "0");
+
+  const status = document.createElement("span");
+  status.className = "status";
+  status.textContent = sauce.url ? "AVAILABLE" : "COMING SOON";
+
+  top.append(number, status);
+
+  const details = document.createElement("div");
+  const heading = document.createElement("h3");
+  heading.textContent = sauce.title;
+
+  const description = document.createElement("p");
+  description.textContent = sauce.description;
+
+  details.append(heading, description);
+
+  const watch = document.createElement("a");
+  watch.className = "watch" + (sauce.url ? "" : " disabled");
+  watch.textContent = sauce.url ? "Watch ↗" : "Coming soon";
+
+  if (sauce.url) {
+    watch.href = sauce.url;
+    watch.target = "_blank";
+    watch.rel = "noopener noreferrer";
+  } else {
+    watch.href = "#";
+    watch.setAttribute("aria-disabled", "true");
+    watch.addEventListener("click", event => event.preventDefault());
+  }
+
+  card.append(top, details, watch);
+  grid.appendChild(card);
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
