@@ -1,479 +1,743 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#101010">
-<title>Sauce Giver — Find Your Sauce</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAUCEGIVER — Beauty, Fashion & Lifestyle Editorial</title>
 
-<style>
-:root {
-  --bg: #101010;
-  --card: #191919;
-  --text: #f5f5f5;
-  --muted: #999;
-  --accent: #c8fff5;
-  --border: rgba(255,255,255,.12);
-}
+  <!-- Google Fonts: Bebas Neue, Alex Brush & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap"
+    rel="stylesheet"
+  />
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-html {
-  scroll-behavior: smooth;
-}
+  <!-- Tailwind Custom Configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            alabaster: '#FAF8F5',
+            cream: '#F2EDE4',
+            charcoal: '#141414',
+            muted: '#6E6A63',
+            champagne: '#C5A059',
+            champagneLight: '#DFC58E',
+          },
+          fontFamily: {
+            display: ['"Bebas Neue"', 'sans-serif'],
+            script: ['"Alex Brush"', 'cursive'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.5;
-}
+  <!-- Custom Styles for Editorial Polish & Masonry/Lightbox Transitions -->
+  <style>
+    body {
+      background-color: #FAF8F5;
+      color: #141414;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
 
-/* Background video */
+    /* Subtle Editorial Paper Grain Overlay */
+    .paper-grain {
+      background-image: radial-gradient(rgba(20, 20, 20, 0.03) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
 
-.background-video {
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  overflow: hidden;
-  background: #101010;
-}
+    /* Glassmorphic Pill Bar */
+    .glass-pill-bar {
+      background: rgba(250, 248, 245, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(197, 160, 89, 0.25);
+      box-shadow: 0 10px 30px -10px rgba(20, 20, 20, 0.06);
+    }
 
-.background-video video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: .30;
-}
+    /* Gallery Card Entrance Animation */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-.background-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background: linear-gradient(
-    to bottom,
-    rgba(16,16,16,.45),
-    rgba(16,16,16,.88) 40%,
-    #101010 85%
-  );
-}
+    .animate-card {
+      animation: fadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
 
-/* Navigation */
-
-header {
-  width: 100%;
-  padding: 24px 7%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--border);
-}
-
-.logo {
-  font-size: 19px;
-  font-weight: 800;
-  letter-spacing: -1px;
-}
-
-.logo span {
-  color: var(--accent);
-}
-
-nav a {
-  text-decoration: none;
-  color: var(--text);
-  font-size: 13px;
-  margin-left: 22px;
-  opacity: .8;
-}
-
-nav a:hover {
-  opacity: 1;
-}
-
-/* Hero */
-
-.hero {
-  min-height: 390px;
-  padding: 100px 7% 85px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.eyebrow {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  color: var(--accent);
-  margin-bottom: 22px;
-}
-
-.hero h1 {
-  font-size: clamp(48px, 9vw, 100px);
-  line-height: .95;
-  letter-spacing: -6px;
-  font-weight: 800;
-  max-width: 850px;
-}
-
-.hero h1 span {
-  color: var(--accent);
-}
-
-.hero p {
-  max-width: 430px;
-  margin-top: 25px;
-  color: #c1c1c1;
-  font-size: 15px;
-}
-
-/* Main section */
-
-main {
-  padding: 0 7% 90px;
-}
-
-.section-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  gap: 15px;
-  margin-bottom: 28px;
-}
-
-.section-heading h2 {
-  font-size: 27px;
-  letter-spacing: -1px;
-}
-
-.section-heading p {
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.sauce-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.sauce-card {
-  min-width: 0;
-  min-height: 145px;
-  padding: 23px;
-  background: rgba(25,25,25,.85);
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 20px;
-  transition: border-color .2s, transform .2s;
-}
-
-.sauce-card:hover {
-  border-color: rgba(200,255,69,.6);
-  transform: translateY(-2px);
-}
-
-.card-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.card-number {
-  font-size: 11px;
-  color: var(--muted);
-  letter-spacing: 1px;
-}
-
-.status {
-  font-size: 10px;
-  color: var(--accent);
-  border: 1px solid rgba(200,255,69,.3);
-  padding: 4px 7px;
-  border-radius: 3px;
-}
-
-.sauce-card h3 {
-  font-size: 19px;
-  letter-spacing: -.5px;
-  overflow-wrap: anywhere;
-}
-
-.sauce-card p {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 5px;
-}
-
-.watch {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  align-self: flex-start;
-  gap: 10px;
-  padding: 10px 17px;
-  background: var(--accent);
-  color: #111;
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 800;
-  border-radius: 3px;
-  transition: background .2s;
-}
-
-.watch:hover {
-  background: #e0ff91;
-}
-
-.watch.disabled {
-  background: #333;
-  color: #888;
-  cursor: not-allowed;
-}
-
-/* Footer */
-
-footer {
-  padding: 25px 7%;
-  border-top: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-  flex-wrap: wrap;
-  color: var(--muted);
-  font-size: 11px;
-}
-
-footer a {
-  color: var(--text);
-  text-decoration: none;
-}
-
-/* Responsive */
-
-@media (min-width: 900px) {
-  .sauce-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 1250px) {
-  .sauce-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 550px) {
-  header {
-    padding: 20px 5%;
-  }
-
-  nav a {
-    margin-left: 12px;
-    font-size: 11px;
-  }
-
-  .hero {
-    min-height: 350px;
-    padding: 80px 5%;
-  }
-
-  .hero h1 {
-    letter-spacing: -3px;
-  }
-
-  main {
-    padding: 0 5% 60px;
-  }
-
-  .sauce-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .sauce-card {
-    min-height: 135px;
-  }
-
-  .section-heading h2 {
-    font-size: 23px;
-  }
-}
-</style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FAF8F5;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D6CEC2;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #C5A059;
+    }
+  </style>
 </head>
+<body class="paper-grain antialiased selection:bg-champagne/25 selection:text-charcoal">
 
-<body>
-
-<!-- Replace this with your own publicly accessible background video URL -->
-<div class="background-video">
-  <video autoplay muted loop playsinline>
-    <source src="https://digiskills52.wordpress.com/wp-content/uploads/2026/10/blackfire-s-honeymoon-hinca-p_1080p.mp4" type="video/mp4">
-  </video>
-</div>
-<div class="background-overlay"></div>
-
-<header>
-  <a class="logo" href="#" style="color:inherit;text-decoration:none">
-    SAUCE<span>GIVER.</span>
-  </a>
-
-  <nav>
-    <a href="#"></a>
-    <a href=""></a>
-  </nav>
-</header>
-
-<section class="hero" id="about">
-  <div class="eyebrow">Your source. Your next move♡.</div>
-
-  <h1>FIND YOUR<br><span>SAUCE.</span></h1>
-
-  <p>
-    A curated collection of videos, Try not to cum in 30 minutes.
-  </p>
-</section>
-
-<main id="sauces">
-  <div class="section-heading">
-    <div>
-      <div class="eyebrow">explore</div>
-      <h2>All the sauce.</h2>
-    </div>
-    <p id="count">50 sections</p>
+  <!-- Top Subtle Editorial Announcement Strip -->
+  <div class="w-full border-b border-charcoal/10 bg-cream/60 py-2 px-4 text-center">
+    <p class="text-[11px] uppercase tracking-[0.28em] text-muted font-medium">
+      Issue No. 04 &nbsp;•&nbsp; Curated Visual Journal &nbsp;•&nbsp; Est. 2026
+    </p>
   </div>
 
-  <div class="sauce-grid" id="sauceGrid"></div>
-</main>
+  <!-- ========================================================= -->
+  <!-- 1. TOP PROFILE & EDITORIAL MASTHEAD SECTION               -->
+  <!-- ========================================================= -->
+  <header class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8 sm:pt-16 sm:pb-12 text-center">
+    
+    <!-- Decorative Radial Glow behind Masthead -->
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute top-10 left-1/2 -translate-x-1/2 w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-champagne/10 blur-3xl -z-10"
+    ></div>
 
-<footer>
-  <span>© <span id="year"></span> Sauce Giver.</span>
-  <a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Back to top ↑</a>
-</footer>
+    <!-- Profile Avatar Container (At Top) -->
+    <div class="relative inline-flex flex-col items-center mb-6 group">
+      <div class="relative p-1.5 rounded-full bg-gradient-to-tr from-champagne via-champagneLight to-champagne/40 shadow-md transition-transform duration-500 group-hover:scale-105">
+        <div class="p-1 bg-alabaster rounded-full">
+          <img
+            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=85"
+            alt="Saucegiver Editorial Profile"
+            onerror="this.src='https://placehold.co/200x200/141414/C5A059?text=SG'"
+            class="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover object-center"
+          />
+        </div>
 
-<script>
-/*
-=====================================================
-SAUCE GIVER SETTINGS
-=====================================================
+        <!-- Minimal Editorial Verified Badge -->
+        <span
+          title="Verified Editorial Curator"
+          class="absolute bottom-1 right-1 flex items-center justify-center w-7 h-7 rounded-full bg-charcoal text-champagne border-2 border-alabaster shadow-sm"
+        >
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+          </svg>
+        </span>
+      </div>
 
-1. Replace YOUR_BACKGROUND_VIDEO_URL.mp4 above.
-2. Add your video links below.
-3. Keep each video URL publicly accessible.
-4. Unconfigured sections show "Coming soon".
-*/
+      <!-- Subtle Handle Pill -->
+      <span class="mt-3 text-xs font-medium tracking-[0.22em] uppercase text-muted">
+        @saucegiver
+      </span>
+    </div>
 
-const sauces = [
-  { title: "Sauce 01", description: "Explore the first drop.", url: "https://mega.nz/file/iaIm1ZzQ#HZfZ8NYys9XqoBaAzYkl8dVmkGZzspOkoqvS26SbxMQ" },
-  { title: "Sauce 02", description: "Explore the second drop.", url: "" },
-  { title: "Sauce 03", description: "Explore the third drop.", url: "" },
-  { title: "Sauce 04", description: "Explore the fourth drop.", url: "" },
-  { title: "Sauce 05", description: "Explore the fifth drop.", url: "" },
-  { title: "Sauce 06", description: "Discover something new.", url: "" },
-  { title: "Sauce 07", description: "Discover something new.", url: "" },
-  { title: "Sauce 08", description: "Discover something new.", url: "" },
-  { title: "Sauce 09", description: "Discover something new.", url: "" },
-  { title: "Sauce 10", description: "Discover something new.", url: "" },
-  { title: "Sauce 11", description: "A new video awaits.", url: "" },
-  { title: "Sauce 12", description: "A new video awaits.", url: "" },
-  { title: "Sauce 13", description: "A new video awaits.", url: "" },
-  { title: "Sauce 14", description: "A new video awaits.", url: "" },
-  { title: "Sauce 15", description: "A new video awaits.", url: "" },
-  { title: "Sauce 16", description: "Watch the latest drop.", url: "" },
-  { title: "Sauce 17", description: "Watch the latest drop.", url: "" },
-  { title: "Sauce 18", description: "Watch the latest drop.", url: "" },
-  { title: "Sauce 19", description: "Watch the latest drop.", url: "" },
-  { title: "Sauce 20", description: "Watch the latest drop.", url: "" },
-  { title: "Sauce 21", description: "Find your next inspiration.", url: "" },
-  { title: "Sauce 22", description: "Find your next inspiration.", url: "" },
-  { title: "Sauce 23", description: "Find your next inspiration.", url: "" },
-  { title: "Sauce 24", description: "Find your next inspiration.", url: "" },
-  { title: "Sauce 25", description: "Find your next inspiration.", url: "" },
-  { title: "Sauce 26", description: "More ideas. More sauce.", url: "" },
-  { title: "Sauce 27", description: "More ideas. More sauce.", url: "" },
-  { title: "Sauce 28", description: "More ideas. More sauce.", url: "" },
-  { title: "Sauce 29", description: "More ideas. More sauce.", url: "" },
-  { title: "Sauce 30", description: "More ideas. More sauce.", url: "" },
-  { title: "Sauce 31", description: "Keep exploring.", url: "" },
-  { title: "Sauce 32", description: "Keep exploring.", url: "" },
-  { title: "Sauce 33", description: "Keep exploring.", url: "" },
-  { title: "Sauce 34", description: "Keep exploring.", url: "" },
-  { title: "Sauce 35", description: "Keep exploring.", url: "" },
-  { title: "Sauce 36", description: "Your next watch is here.", url: "" },
-  { title: "Sauce 37", description: "Your next watch is here.", url: "" },
-  { title: "Sauce 38", description: "Your next watch is here.", url: "" },
-  { title: "Sauce 39", description: "Your next watch is here.", url: "" },
-  { title: "Sauce 40", description: "Your next watch is here.", url: "" },
-  { title: "Sauce 41", description: "The collection continues.", url: "" },
-  { title: "Sauce 42", description: "The collection continues.", url: "" },
-  { title: "Sauce 43", description: "The collection continues.", url: "" },
-  { title: "Sauce 44", description: "The collection continues.", url: "" },
-  { title: "Sauce 45", description: "The collection continues.", url: "" },
-  { title: "Sauce 46", description: "One more to explore.", url: "" },
-  { title: "Sauce 47", description: "One more to explore.", url: "" },
-  { title: "Sauce 48", description: "One more to explore.", url: "" },
-  { title: "Sauce 49", description: "One more to explore.", url: "" },
-  { title: "Sauce 50", description: "The final drop. For now.", url: "" }
-];
+    <!-- Brand Heading (Bebas Neue) + Overlapping Script Accent (Alex Brush) -->
+    <div class="relative inline-block w-full max-w-3xl mx-auto">
+      <span class="block font-script text-3xl sm:text-4xl md:text-5xl text-champagne -mb-3 sm:-mb-5 relative z-10 select-none transform -rotate-2">
+        Curated Aesthetics by
+      </span>
 
-const grid = document.getElementById("sauceGrid");
+      <h1 class="font-display text-6xl sm:text-8xl md:text-9xl tracking-[0.08em] text-charcoal leading-none uppercase select-none">
+        saucegiver
+      </h1>
+    </div>
 
-sauces.forEach((sauce, index) => {
-  const card = document.createElement("article");
-  card.className = "sauce-card";
+    <!-- Brand Subheading -->
+    <p class="mt-4 sm:mt-5 max-w-xl mx-auto text-sm sm:text-base md:text-lg text-muted font-normal leading-relaxed px-2">
+      Hi, we share insights about <span class="text-charcoal font-medium">beauty</span>,
+      <span class="text-charcoal font-medium">fashion</span>,
+      <span class="text-charcoal font-medium">lifestyle</span> and more...
+    </p>
 
-  const top = document.createElement("div");
-  top.className = "card-top";
+    <!-- Minimalist Social Links & Copy Link Action -->
+    <div class="mt-6 flex items-center justify-center gap-3">
+      <a
+        href="#gallery"
+        aria-label="Instagram"
+        class="p-2.5 rounded-full border border-charcoal/15 bg-white/60 text-charcoal hover:border-champagne hover:text-champagne transition-all duration-300"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+          <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+          <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+        </svg>
+      </a>
 
-  const number = document.createElement("span");
-  number.className = "card-number";
-  number.textContent = "#" + String(index + 1).padStart(2, "0");
+      <a
+        href="#gallery"
+        aria-label="Pinterest"
+        class="p-2.5 rounded-full border border-charcoal/15 bg-white/60 text-charcoal hover:border-champagne hover:text-champagne transition-all duration-300"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M8 20l4-9" />
+          <path d="M10.7 14c.437 1.263 1.43 2 2.55 2c2.071 0 3.75-1.554 3.75-4a5 5 0 1 0-9.7 1.7" />
+        </svg>
+      </a>
 
-  const status = document.createElement("span");
-  status.className = "status";
-  status.textContent = sauce.url ? "AVAILABLE" : "COMING SOON";
+      <button
+        id="shareProfileBtn"
+        type="button"
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-charcoal/15 bg-white/70 text-xs font-medium tracking-wider uppercase text-charcoal hover:border-champagne hover:bg-charcoal hover:text-alabaster transition-all duration-300"
+      >
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+        </svg>
+        <span id="shareBtnText">Share Lookbook</span>
+      </button>
+    </div>
 
-  top.append(number, status);
+    <!-- ========================================================= -->
+    <!-- STICKY GLASSMORPHIC CATEGORY FILTER BAR                   -->
+    <!-- ========================================================= -->
+    <nav
+      aria-label="Gallery Categories"
+      class="sticky top-4 z-30 mt-9 inline-flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 p-1.5 sm:p-2 rounded-full glass-pill-bar max-w-full"
+    >
+      <button
+        data-filter="all"
+        class="filter-btn active px-4 sm:px-5 py-2 rounded-full text-xs sm:text-[13px] font-medium tracking-wider uppercase transition-all duration-300 bg-charcoal text-alabaster shadow-sm"
+      >
+        All
+      </button>
+      <button
+        data-filter="Beauty"
+        class="filter-btn px-4 sm:px-5 py-2 rounded-full text-xs sm:text-[13px] font-medium tracking-wider uppercase transition-all duration-300 text-charcoal/80 hover:text-charcoal hover:bg-charcoal/5"
+      >
+        Beauty
+      </button>
+      <button
+        data-filter="Fashion"
+        class="filter-btn px-4 sm:px-5 py-2 rounded-full text-xs sm:text-[13px] font-medium tracking-wider uppercase transition-all duration-300 text-charcoal/80 hover:text-charcoal hover:bg-charcoal/5"
+      >
+        Fashion
+      </button>
+      <button
+        data-filter="Lifestyle"
+        class="filter-btn px-4 sm:px-5 py-2 rounded-full text-xs sm:text-[13px] font-medium tracking-wider uppercase transition-all duration-300 text-charcoal/80 hover:text-charcoal hover:bg-charcoal/5"
+      >
+        Lifestyle
+      </button>
+      <button
+        data-filter="Editorial"
+        class="filter-btn px-4 sm:px-5 py-2 rounded-full text-xs sm:text-[13px] font-medium tracking-wider uppercase transition-all duration-300 text-charcoal/80 hover:text-charcoal hover:bg-charcoal/5"
+      >
+        Editorial
+      </button>
+    </nav>
+  </header>
 
-  const details = document.createElement("div");
-  const heading = document.createElement("h3");
-  heading.textContent = sauce.title;
+  <!-- ========================================================= -->
+  <!-- 2. PREMIUM ASYMMETRIC EDITORIAL GALLERY GRID              -->
+  <!-- ========================================================= -->
+  <main id="gallery" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+    
+    <!-- Section Meta Bar -->
+    <div class="flex items-center justify-between border-b border-charcoal/10 pb-3 mb-8">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-champagne"></span>
+        <span id="activeCategoryLabel" class="text-xs uppercase tracking-[0.2em] text-muted font-medium">
+          Showing All Curations
+        </span>
+      </div>
+      <span id="itemCountLabel" class="font-display text-lg tracking-wider text-charcoal">
+        09 STORIES
+      </span>
+    </div>
 
-  const description = document.createElement("p");
-  description.textContent = sauce.description;
+    <!-- Responsive Asymmetric Masonry / Bento Grid -->
+    <div
+      id="galleryGrid"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 auto-rows-[340px] sm:auto-rows-[360px]"
+    >
+      <!-- Cards are dynamically injected by JavaScript for clean state & Lightbox sync -->
+    </div>
+  </main>
 
-  details.append(heading, description);
+  <!-- ========================================================= -->
+  <!-- 3. MINIMALIST EDITORIAL FOOTER                            -->
+  <!-- ========================================================= -->
+  <footer class="border-t border-charcoal/10 bg-cream/50 py-14 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto flex flex-col items-center text-center">
+      <!-- Brand Signature in Alex Brush -->
+      <a
+        href="#"
+        class="font-script text-5xl sm:text-6xl text-charcoal hover:text-champagne transition-colors duration-300"
+      >
+        saucegiver
+      </a>
 
-  const watch = document.createElement("a");
-  watch.className = "watch" + (sauce.url ? "" : " disabled");
-  watch.textContent = sauce.url ? "Watch ↗" : "Coming soon";
+      <p class="mt-2 text-xs uppercase tracking-[0.25em] text-muted">
+        Beauty &nbsp;•&nbsp; Fashion &nbsp;•&nbsp; Lifestyle &nbsp;•&nbsp; Visual Culture
+      </p>
 
-  if (sauce.url) {
-    watch.href = sauce.url;
-    watch.target = "_blank";
-    watch.rel = "noopener noreferrer";
-  } else {
-    watch.href = "#";
-    watch.setAttribute("aria-disabled", "true");
-    watch.addEventListener("click", event => event.preventDefault());
-  }
+      <div class="w-12 h-px bg-champagne/50 my-6"></div>
 
-  card.append(top, details, watch);
-  grid.appendChild(card);
-});
+      <div class="w-full flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted">
+        <p>© 2026 SAUCEGIVER. All rights reserved.</p>
 
-document.getElementById("year").textContent = new Date().getFullYear();
-</script>
+        <button
+          id="backToTopBtn"
+          type="button"
+          class="inline-flex items-center gap-2 uppercase tracking-[0.2em] text-charcoal hover:text-champagne transition-colors font-medium py-2 px-3 rounded-full"
+        >
+          <span>Back to Top</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </footer>
 
+  <!-- ========================================================= -->
+  <!-- 4. INTERACTIVE FULL-SCREEN LIGHTBOX MODAL                 -->
+  <!-- ========================================================= -->
+  <div
+    id="lightboxModal"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    class="fixed inset-0 z-50 hidden items-center justify-center bg-charcoal/90 backdrop-blur-md p-3 sm:p-6 md:p-10 opacity-0 transition-opacity duration-300"
+  >
+    <!-- Close Button -->
+    <button
+      id="closeLightboxBtn"
+      aria-label="Close modal"
+      class="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 flex items-center justify-center w-11 h-11 rounded-full bg-alabaster/10 hover:bg-champagne text-alabaster hover:text-charcoal border border-alabaster/20 transition-all duration-300"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <!-- Previous Button -->
+    <button
+      id="prevLightboxBtn"
+      aria-label="Previous image"
+      class="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-11 h-11 rounded-full bg-alabaster/10 hover:bg-champagne text-alabaster hover:text-charcoal border border-alabaster/20 transition-all duration-300"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+
+    <!-- Next Button -->
+    <button
+      id="nextLightboxBtn"
+      aria-label="Next image"
+      class="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-11 h-11 rounded-full bg-alabaster/10 hover:bg-champagne text-alabaster hover:text-charcoal border border-alabaster/20 transition-all duration-300"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+
+    <!-- Modal Content Card -->
+    <div
+      id="lightboxCard"
+      class="relative w-full max-w-5xl bg-alabaster text-charcoal rounded-2xl overflow-hidden shadow-2xl grid grid-cols-1 lg:grid-cols-12 max-h-[90vh]"
+    >
+      <!-- Left / Top Image Showcase -->
+      <div class="lg:col-span-7 bg-charcoal flex items-center justify-center overflow-hidden max-h-[50vh] lg:max-h-[82vh]">
+        <img
+          id="lightboxImg"
+          src=""
+          alt=""
+          class="w-full h-full object-cover"
+        />
+      </div>
+
+      <!-- Right / Bottom Editorial Story Panel -->
+      <div class="lg:col-span-5 p-6 sm:p-8 md:p-10 flex flex-col justify-between overflow-y-auto">
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-4">
+            <span
+              id="lightboxCategory"
+              class="px-3 py-1 rounded-full bg-champagne/15 text-champagne text-[11px] font-semibold uppercase tracking-[0.2em]"
+            >
+              Category
+            </span>
+            <span id="lightboxNote" class="font-script text-2xl text-muted">
+              Autumn Note
+            </span>
+          </div>
+
+          <h2
+            id="lightboxTitle"
+            class="font-display text-4xl sm:text-5xl tracking-wide text-charcoal leading-none"
+          >
+            Editorial Title
+          </h2>
+
+          <div class="w-10 h-0.5 bg-champagne my-5"></div>
+
+          <p
+            id="lightboxDescription"
+            class="text-sm sm:text-base text-muted leading-relaxed"
+          >
+            Editorial story and insight snippet goes here.
+          </p>
+        </div>
+
+        <div class="mt-8 pt-5 border-t border-charcoal/10 flex items-center justify-between">
+          <div>
+            <span class="block text-[10px] uppercase tracking-[0.22em] text-muted">Curated By</span>
+            <span class="font-script text-2xl text-charcoal">saucegiver</span>
+          </div>
+          <span id="lightboxCounter" class="font-display text-xl tracking-widest text-muted">
+            01 / 09
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification for Clipboard Share -->
+  <div
+    id="toastMessage"
+    class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 translate-y-3 transition-all duration-300 px-5 py-2.5 rounded-full bg-charcoal text-alabaster text-xs tracking-wider uppercase shadow-lg border border-champagne/30"
+  >
+    Lookbook link copied to clipboard
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- JAVASCRIPT: DATA, FILTERING, RENDERING & LIGHTBOX         -->
+  <!-- ========================================================= -->
+  <script>
+    // Curated Editorial Gallery Dataset
+    const galleryItems = [
+      {
+        id: 1,
+        title: 'GOLDEN HOUR DEW',
+        category: 'Beauty',
+        note: 'Skin Minimalism',
+        spanClass: 'lg:row-span-2', // Tall portrait bento card
+        image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=85',
+        description:
+          'Luminous, barrier-first skincare rituals designed to catch late-afternoon warmth. Layering lightweight peptide serums with sheer liquid bronzer creates an effortless glass-skin finish without heavy coverage.',
+      },
+      {
+        id: 2,
+        title: 'SCULPTED SILHOUETTES',
+        category: 'Fashion',
+        note: 'Autumn Tailoring',
+        spanClass: '',
+        image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=900&q=85',
+        description:
+          'Architectural shoulders meet fluid wool draping. This season’s quiet luxury uniform relies on tonal neutrals, crisp pleats, and intentional proportion play.',
+      },
+      {
+        id: 3,
+        title: 'SLOW MORNING RITUALS',
+        category: 'Lifestyle',
+        note: 'Mindful Spaces',
+        spanClass: '',
+        image: 'https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=900&q=85',
+        description:
+          'Designing sanctuary corners at home—unhurried espresso pours, linen textures, and warm travertine accents that anchor the day before stepping into the city.',
+      },
+      {
+        id: 4,
+        title: 'NOIR & CHAMPAGNE',
+        category: 'Editorial',
+        note: 'Cover Story 04',
+        spanClass: 'lg:col-span-2', // Wide editorial feature card
+        image: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=1200&q=85',
+        description:
+          'An exploration of contrast in modern eveningwear. Pairing raw silk textures with sharp monochrome framing celebrates timeless femininity with a rebellious edge.',
+      },
+      {
+        id: 5,
+        title: 'VELVET CRIMSON LIP',
+        category: 'Beauty',
+        note: 'Evening Palette',
+        spanClass: 'lg:row-span-2', // Tall portrait card
+        image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=85',
+        description:
+          'The return of blurred berry and classic crimson stains. Pressed gently onto the center of the lip with fingertips for a lived-in Parisian editorial allure.',
+      },
+      {
+        id: 6,
+        title: 'MONOCHROME EASE',
+        category: 'Fashion',
+        note: 'Capsule Edit',
+        spanClass: '',
+        image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=85',
+        description:
+          'Five foundational wardrobe pieces styled seven ways—proving that restraint in color palette unlocks maximum versatility across seasons.',
+      },
+      {
+        id: 7,
+        title: 'BOTANICAL INFUSIONS',
+        category: 'Lifestyle',
+        note: 'Scent & Atmosphere',
+        spanClass: '',
+        image: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=900&q=85',
+        description:
+          'Notes of smoked cedar, neroli blossom, and warm amber. How olfactory layering transforms everyday living spaces into sensory retreats.',
+      },
+      {
+        id: 8,
+        title: 'AVANT-GARDE MUSE',
+        category: 'Editorial',
+        note: 'Studio Monograph',
+        spanClass: '',
+        image: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=85',
+        description:
+          'Shot on medium-format film in natural studio daylight, capturing raw movement, unretouched texture, and expressive poise.',
+      },
+      {
+        id: 9,
+        title: 'EFFORTLESS DRAPE',
+        category: 'Fashion',
+        note: 'Resort Notes',
+        spanClass: '',
+        image: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=85',
+        description:
+          'Sun-bleached cottons and fluid silk slips tailored for warm coastal evenings and spontaneous weekend escapes.',
+      },
+    ];
+
+    // State
+    let currentFilter = 'all';
+    let filteredItems = [...galleryItems];
+    let currentLightboxIndex = 0;
+
+    // DOM Elements
+    const galleryGrid = document.getElementById('galleryGrid');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const activeCategoryLabel = document.getElementById('activeCategoryLabel');
+    const itemCountLabel = document.getElementById('itemCountLabel');
+
+    // Lightbox Elements
+    const lightboxModal = document.getElementById('lightboxModal');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxCategory = document.getElementById('lightboxCategory');
+    const lightboxNote = document.getElementById('lightboxNote');
+    const lightboxTitle = document.getElementById('lightboxTitle');
+    const lightboxDescription = document.getElementById('lightboxDescription');
+    const lightboxCounter = document.getElementById('lightboxCounter');
+    const closeLightboxBtn = document.getElementById('closeLightboxBtn');
+    const prevLightboxBtn = document.getElementById('prevLightboxBtn');
+    const nextLightboxBtn = document.getElementById('nextLightboxBtn');
+
+    /**
+     * Render Gallery Cards based on active filter
+     */
+    function renderGallery(filter = 'all') {
+      currentFilter = filter;
+      filteredItems =
+        filter === 'all'
+          ? [...galleryItems]
+          : galleryItems.filter((item) => item.category.toLowerCase() === filter.toLowerCase());
+
+      // Update Header Meta Labels
+      activeCategoryLabel.textContent =
+        filter === 'all' ? 'Showing All Curations' : `Filtered by ${filter}`;
+      const countStr = String(filteredItems.length).padStart(2, '0');
+      itemCountLabel.textContent = `${countStr} ${filteredItems.length === 1 ? 'STORY' : 'STORIES'}`;
+
+      // Clear & Render Grid
+      galleryGrid.innerHTML = '';
+
+      filteredItems.forEach((item, index) => {
+        const card = document.createElement('article');
+        // Keep asymmetric span classes when viewing "all" for editorial rhythm
+        const spanClasses = filter === 'all' ? item.spanClass : '';
+        card.className = `group relative rounded-2xl overflow-hidden bg-cream border border-charcoal/10 cursor-pointer shadow-sm hover:shadow-xl transition-shadow duration-500 animate-card ${spanClasses}`;
+        card.style.animationDelay = `${index * 65}ms`;
+
+        card.innerHTML = `
+          <img
+            src="${item.image}"
+            alt="${item.title}"
+            loading="lazy"
+            onerror="this.src='https://placehold.co/800x1000/141414/C5A059?text=SAUCEGIVER'"
+            class="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+
+          <!-- Subtle Permanent Vignette + Hover Deepening Gradient -->
+          <div class="absolute inset-0 bg-gradient-to-t from-charcoal/85 via-charcoal/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-500"></div>
+
+          <!-- Top Floating Category Pill -->
+          <div class="absolute top-4 left-4 right-4 flex items-center justify-between">
+            <span class="px-3 py-1 rounded-full bg-alabaster/90 backdrop-blur-md text-charcoal text-[10px] font-semibold uppercase tracking-[0.2em] shadow-sm">
+              ${item.category}
+            </span>
+
+            <span class="w-8 h-8 rounded-full bg-charcoal/60 backdrop-blur-md text-alabaster flex items-center justify-center opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 border border-alabaster/20">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+              </svg>
+            </span>
+          </div>
+
+          <!-- Bottom Editorial Caption -->
+          <div class="absolute bottom-0 inset-x-0 p-5 sm:p-6 flex flex-col justify-end transform translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
+            <span class="font-script text-2xl sm:text-3xl text-champagneLight leading-none mb-0.5">
+              ${item.note}
+            </span>
+            <h3 class="font-display text-3xl sm:text-4xl tracking-wider text-alabaster leading-none">
+              ${item.title}
+            </h3>
+            <p class="mt-2 text-xs text-alabaster/75 line-clamp-2 opacity-0 max-h-0 group-hover:opacity-100 group-hover:max-h-12 transition-all duration-300">
+              ${item.description}
+            </p>
+          </div>
+        `;
+
+        card.addEventListener('click', () => openLightbox(index));
+        galleryGrid.appendChild(card);
+      });
+    }
+
+    /**
+     * Filter Button Click Handlers
+     */
+    filterButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach((b) => {
+          b.classList.remove('bg-charcoal', 'text-alabaster', 'shadow-sm');
+          b.classList.add('text-charcoal/80', 'hover:text-charcoal', 'hover:bg-charcoal/5');
+        });
+
+        btn.classList.add('bg-charcoal', 'text-alabaster', 'shadow-sm');
+        btn.classList.remove('text-charcoal/80', 'hover:text-charcoal', 'hover:bg-charcoal/5');
+
+        const selectedFilter = btn.getAttribute('data-filter');
+        renderGallery(selectedFilter);
+      });
+    });
+
+    /**
+     * Lightbox Functions
+     */
+    function openLightbox(index) {
+      currentLightboxIndex = index;
+      updateLightboxContent();
+
+      lightboxModal.classList.remove('hidden');
+      lightboxModal.classList.add('flex');
+      lightboxModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+
+      requestAnimationFrame(() => {
+        lightboxModal.classList.remove('opacity-0');
+        lightboxModal.classList.add('opacity-100');
+      });
+    }
+
+    function closeLightbox() {
+      lightboxModal.classList.remove('opacity-100');
+      lightboxModal.classList.add('opacity-0');
+      lightboxModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+
+      setTimeout(() => {
+        lightboxModal.classList.add('hidden');
+        lightboxModal.classList.remove('flex');
+      }, 280);
+    }
+
+    function updateLightboxContent() {
+      const item = filteredItems[currentLightboxIndex];
+      if (!item) return;
+
+      lightboxImg.src = item.image;
+      lightboxImg.alt = item.title;
+      lightboxCategory.textContent = item.category;
+      lightboxNote.textContent = item.note;
+      lightboxTitle.textContent = item.title;
+      lightboxDescription.textContent = item.description;
+
+      const currentStr = String(currentLightboxIndex + 1).padStart(2, '0');
+      const totalStr = String(filteredItems.length).padStart(2, '0');
+      lightboxCounter.textContent = `${currentStr} / ${totalStr}`;
+    }
+
+    function showNextItem() {
+      currentLightboxIndex = (currentLightboxIndex + 1) % filteredItems.length;
+      updateLightboxContent();
+    }
+
+    function showPrevItem() {
+      currentLightboxIndex =
+        (currentLightboxIndex - 1 + filteredItems.length) % filteredItems.length;
+      updateLightboxContent();
+    }
+
+    // Lightbox Event Listeners
+    closeLightboxBtn.addEventListener('click', closeLightbox);
+    nextLightboxBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showNextItem();
+    });
+    prevLightboxBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showPrevItem();
+    });
+
+    // Close on Backdrop Click
+    lightboxModal.addEventListener('click', (e) => {
+      if (e.target === lightboxModal) {
+        closeLightbox();
+      }
+    });
+
+    // Keyboard Navigation (Escape, ArrowLeft, ArrowRight)
+    document.addEventListener('keydown', (e) => {
+      if (lightboxModal.classList.contains('hidden')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') showNextItem();
+      if (e.key === 'ArrowLeft') showPrevItem();
+    });
+
+    // Share Lookbook Button (Uses execCommand fallback for iframe compatibility)
+    const shareProfileBtn = document.getElementById('shareProfileBtn');
+    const toastMessage = document.getElementById('toastMessage');
+
+    shareProfileBtn.addEventListener('click', () => {
+      const tempInput = document.createElement('input');
+      tempInput.value = window.location.href;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand('copy');
+      } catch (err) {
+        // Fallback silently handled
+      }
+      document.body.removeChild(tempInput);
+
+      toastMessage.classList.remove('opacity-0', 'translate-y-3');
+      toastMessage.classList.add('opacity-100', 'translate-y-0');
+
+      setTimeout(() => {
+        toastMessage.classList.add('opacity-0', 'translate-y-3');
+        toastMessage.classList.remove('opacity-100', 'translate-y-0');
+      }, 2400);
+    });
+
+    // Smooth Back to Top
+    document.getElementById('backToTopBtn').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Initial Render
+    renderGallery('all');
+  </script>
 </body>
 </html>
