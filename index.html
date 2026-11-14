@@ -1,743 +1,641 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SAUCEGIVER — Beauty, Fashion & Lifestyle Editorial</title>
-
-  <!-- Google Fonts: Bebas Neue, Alex Brush & Plus Jakarta Sans -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap"
-    rel="stylesheet"
-  />
-
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Tailwind Custom Configuration -->
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            alabaster: '#FAF8F5',
-            cream: '#F2EDE4',
-            charcoal: '#141414',
-            muted: '#6E6A63',
-            champagne: '#C5A059',
-            champagneLight: '#DFC58E',
-          },
-          fontFamily: {
-            display: ['"Bebas Neue"', 'sans-serif'],
-            script: ['"Alex Brush"', 'cursive'],
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-          },
-        },
-      },
-    };
-  </script>
-
-  <!-- Custom Styles for Editorial Polish & Masonry/Lightbox Transitions -->
+  <title>saucegiver — Beauty, Fashion & Lifestyle</title>
+  <!-- Google Fonts: Bebas Neue, Alex Brush & Plus Jakarta Sans for clean body readability -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
   <style>
+    :root {
+      --bg-primary: #FAF8F5;
+      --bg-secondary: #F2EDE6;
+      --surface: #FFFFFF;
+      --text-main: #181716;
+      --text-muted: #68635E;
+      --accent: #9E6B55;
+      --border: #E5DFD7;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      background-color: #FAF8F5;
-      color: #141414;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
       font-family: 'Plus Jakarta Sans', sans-serif;
-      overflow-x: hidden;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Subtle Editorial Paper Grain Overlay */
-    .paper-grain {
-      background-image: radial-gradient(rgba(20, 20, 20, 0.03) 1px, transparent 0);
-      background-size: 24px 24px;
+    a {
+      text-decoration: none;
+      color: inherit;
     }
 
-    /* Glassmorphic Pill Bar */
-    .glass-pill-bar {
-      background: rgba(250, 248, 245, 0.78);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(197, 160, 89, 0.25);
-      box-shadow: 0 10px 30px -10px rgba(20, 20, 20, 0.06);
+    /* Minimal Top Navigation */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 6%;
+      border-bottom: 1px solid var(--border);
+      background-color: rgba(250, 248, 245, 0.9);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    /* Gallery Card Entrance Animation */
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(22px);
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 500;
+    }
+
+    .nav-links a {
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-cta {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.15rem;
+      letter-spacing: 0.08em;
+      padding: 0.4rem 1.2rem;
+      border: 1px solid var(--text-main);
+      transition: all 0.3s ease;
+    }
+
+    .nav-cta:hover {
+      background-color: var(--text-main);
+      color: var(--bg-primary);
+    }
+
+    /* Hero & Profile Section (Top Structure) */
+    .hero-profile {
+      text-align: center;
+      padding: 4.5rem 1.5rem 3.5rem;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .profile-wrapper {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 1.25rem;
+    }
+
+    .profile-avatar {
+      width: 118px;
+      height: 118px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--surface);
+      box-shadow: 0 12px 30px rgba(24, 23, 22, 0.08);
+    }
+
+    .profile-badge {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      background: var(--text-main);
+      color: var(--bg-primary);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .brand-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.8rem, 8vw, 6.2rem);
+      line-height: 0.95;
+      letter-spacing: 0.06em;
+      color: var(--text-main);
+      margin-bottom: 0.35rem;
+    }
+
+    .brand-subheading {
+      font-family: 'Alex Brush', cursive;
+      font-size: clamp(1.85rem, 3.8vw, 2.65rem);
+      font-weight: 400;
+      color: var(--accent);
+      line-height: 1.25;
+      margin-bottom: 1.75rem;
+    }
+
+    /* Category Filter Pills */
+    .category-bar {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .cat-pill {
+      padding: 0.45rem 1.25rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.25s ease;
+    }
+
+    .cat-pill.active,
+    .cat-pill:hover {
+      background: var(--text-main);
+      color: var(--bg-primary);
+      border-color: var(--text-main);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 5% 5rem;
+    }
+
+    /* Editorial Featured Post (Split Layout) */
+    .featured-post {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      margin-bottom: 4.5rem;
+      overflow: hidden;
+    }
+
+    .featured-img {
+      width: 100%;
+      height: 100%;
+      min-height: 420px;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .featured-post:hover .featured-img {
+      transform: scale(1.03);
+    }
+
+    .featured-img-wrap {
+      overflow: hidden;
+    }
+
+    .featured-content {
+      padding: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .post-meta {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.85rem;
+    }
+
+    .featured-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.2rem, 3.5vw, 3rem);
+      line-height: 1.05;
+      letter-spacing: 0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .post-excerpt {
+      color: var(--text-muted);
+      font-size: 0.96rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .read-link {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.08em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--text-main);
+      padding-bottom: 2px;
+      width: fit-content;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .read-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* Section Header */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-header h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.05em;
+    }
+
+    .section-header span {
+      font-family: 'Alex Brush', cursive;
+      font-size: 1.65rem;
+      color: var(--accent);
+    }
+
+    /* Editorial Bento / 3-Column Blog Grid */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.25rem;
+    }
+
+    .blog-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 36px rgba(24, 23, 22, 0.06);
+    }
+
+    .card-img-wrap {
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .blog-card:hover .card-img {
+      transform: scale(1.04);
+    }
+
+    .card-body {
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.75rem;
+      line-height: 1.1;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-excerpt {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+    }
+
+    /* Newsletter Banner */
+    .newsletter {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      padding: 4rem 2rem;
+      text-align: center;
+      margin-top: 5rem;
+    }
+
+    .newsletter-script {
+      font-family: 'Alex Brush', cursive;
+      font-size: 2.25rem;
+      color: var(--accent);
+      margin-bottom: 0.2rem;
+    }
+
+    .newsletter h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.75rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+
+    .newsletter p {
+      max-width: 500px;
+      margin: 0 auto 1.75rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      max-width: 460px;
+      margin: 0 auto;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 0.85rem 1.1rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .newsletter-form button {
+      padding: 0.85rem 1.75rem;
+      background: var(--text-main);
+      color: var(--bg-primary);
+      border: none;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .newsletter-form button:hover {
+      background: var(--accent);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .footer-brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.75rem;
+      color: var(--text-main);
+      letter-spacing: 0.06em;
+    }
+
+    .socials {
+      display: flex;
+      gap: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 960px) {
+      .featured-post {
+        grid-template-columns: 1fr;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+      .blog-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 
-    .animate-card {
-      animation: fadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #FAF8F5;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #D6CEC2;
-      border-radius: 9999px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #C5A059;
+    @media (max-width: 640px) {
+      .nav-links {
+        display: none;
+      }
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+      .featured-content {
+        padding: 2rem 1.5rem;
+      }
+      .newsletter-form {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
-<body class="paper-grain antialiased selection:bg-champagne/25 selection:text-charcoal">
+<body>
 
-  <!-- Top Subtle Editorial Announcement Strip -->
-  <div class="w-full border-b border-charcoal/10 bg-cream/60 py-2 px-4 text-center">
-    <p class="text-[11px] uppercase tracking-[0.28em] text-muted font-medium">
-      Issue No. 04 &nbsp;•&nbsp; Curated Visual Journal &nbsp;•&nbsp; Est. 2026
-    </p>
-  </div>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-links">
+      <a href="#featured">Editorial</a>
+      <a href="#stories">Beauty</a>
+      <a href="#stories">Fashion</a>
+      <a href="#stories">Lifestyle</a>
+    </div>
+    <a href="#subscribe" class="nav-cta">Subscribe</a>
+  </nav>
 
-  <!-- ========================================================= -->
-  <!-- 1. TOP PROFILE & EDITORIAL MASTHEAD SECTION               -->
-  <!-- ========================================================= -->
-  <header class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8 sm:pt-16 sm:pb-12 text-center">
-    
-    <!-- Decorative Radial Glow behind Masthead -->
-    <div
-      aria-hidden="true"
-      class="pointer-events-none absolute top-10 left-1/2 -translate-x-1/2 w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-champagne/10 blur-3xl -z-10"
-    ></div>
-
-    <!-- Profile Avatar Container (At Top) -->
-    <div class="relative inline-flex flex-col items-center mb-6 group">
-      <div class="relative p-1.5 rounded-full bg-gradient-to-tr from-champagne via-champagneLight to-champagne/40 shadow-md transition-transform duration-500 group-hover:scale-105">
-        <div class="p-1 bg-alabaster rounded-full">
-          <img
-            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=85"
-            alt="Saucegiver Editorial Profile"
-            onerror="this.src='https://placehold.co/200x200/141414/C5A059?text=SG'"
-            class="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover object-center"
-          />
-        </div>
-
-        <!-- Minimal Editorial Verified Badge -->
-        <span
-          title="Verified Editorial Curator"
-          class="absolute bottom-1 right-1 flex items-center justify-center w-7 h-7 rounded-full bg-charcoal text-champagne border-2 border-alabaster shadow-sm"
-        >
-          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
-          </svg>
-        </span>
-      </div>
-
-      <!-- Subtle Handle Pill -->
-      <span class="mt-3 text-xs font-medium tracking-[0.22em] uppercase text-muted">
-        @saucegiver
-      </span>
+  <!-- Profile, Heading & Subheading Header -->
+  <header class="hero-profile">
+    <div class="profile-wrapper">
+      <img 
+        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" 
+        alt="saucegiver profile" 
+        class="profile-avatar"
+      />
+      <span class="profile-badge">Editor</span>
     </div>
 
-    <!-- Brand Heading (Bebas Neue) + Overlapping Script Accent (Alex Brush) -->
-    <div class="relative inline-block w-full max-w-3xl mx-auto">
-      <span class="block font-script text-3xl sm:text-4xl md:text-5xl text-champagne -mb-3 sm:-mb-5 relative z-10 select-none transform -rotate-2">
-        Curated Aesthetics by
-      </span>
+    <h1 class="brand-heading">saucegiver</h1>
+    <p class="brand-subheading">Hi,we share insights about beauty ,fashion ,lifestyle and more...</p>
 
-      <h1 class="font-display text-6xl sm:text-8xl md:text-9xl tracking-[0.08em] text-charcoal leading-none uppercase select-none">
-        saucegiver
-      </h1>
+    <div class="category-bar" id="filterBar">
+      <button class="cat-pill active" data-filter="all">All Stories</button>
+      <button class="cat-pill" data-filter="beauty">Beauty</button>
+      <button class="cat-pill" data-filter="fashion">Fashion</button>
+      <button class="cat-pill" data-filter="lifestyle">Lifestyle</button>
     </div>
-
-    <!-- Brand Subheading -->
-    <p class="mt-4 sm:mt-5 max-w-xl mx-auto text-sm sm:text-base md:text-lg text-muted font-normal leading-relaxed px-2">
-      Hi, we share insights about <span class="text-charcoal font-medium">beauty</span>,
-      <span class="text-charcoal font-medium">fashion</span>,
-      <span class="text-charcoal font-medium">lifestyle</span> and more...
-    </p>
-
-    <!-- Minimalist Social Links & Copy Link Action -->
-    <div class="mt-6 flex items-center justify-center gap-3">
-      <a
-        href="#gallery"
-        aria-label="Instagram"
-        class="p-2.5 rounded-full border border-charcoal/15 bg-white/60 text-charcoal hover:border-champagne hover:text-champagne transition-all duration-300"
-      >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-          <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-          <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-        </svg>
-      </a>
-
-      <a
-        href="#gallery"
-        aria-label="Pinterest"
-        class="p-2.5 rounded-full border border-charcoal/15 bg-white/60 text-charcoal hover:border-champagne hover:text-champagne transition-all duration-300"
-      >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="10" />
-          <path d="M8 20l4-9" />
-          <path d="M10.7 14c.437 1.263 1.43 2 2.55 2c2.071 0 3.75-1.554 3.75-4a5 5 0 1 0-9.7 1.7" />
-        </svg>
-      </a>
-
-      <button
-        id="shareProfileBtn"
-        type="button"
-        class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-charcoal/15 bg-white/70 text-xs font-medium tracking-wider uppercase text-charcoal hover:border-champagne hover:bg-charcoal hover:text-alabaster transition-all duration-300"
-      >
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-        </svg>
-        <span id="shareBtnText">Share Lookbook</span>
-      </button>
-    </div>
-
-    <!-- ========================================================= -->
-    <!-- STICKY GLASSMORPHIC CATEGORY FILTER BAR                   -->
-    <!-- ========================================================= -->
-    <nav
-      aria-label="Gallery Categories"
-      class="sticky top-4 z-30 mt-9 inline-flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 p-1.5 sm:p-2 rounded-full glass-pill-bar max-w-full"
-    >
-      <button
-        data-filter="all"
-        class="filter-btn active px-4 sm:px-5 py-2 rounded-full text-xs sm:text-[13px] font-medium tracking-wider uppercase transition-all duration-300 bg-charcoal text-alabaster shadow-sm"
-      >
-        All
-      </button>
-      <button
-        data-filter="Beauty"
-        class="filter-btn px-4 sm:px-5 py-2 rounded-full text-xs sm:text-[13px] font-medium tracking-wider uppercase transition-all duration-300 text-charcoal/80 hover:text-charcoal hover:bg-charcoal/5"
-      >
-        Beauty
-      </button>
-      <button
-        data-filter="Fashion"
-        class="filter-btn px-4 sm:px-5 py-2 rounded-full text-xs sm:text-[13px] font-medium tracking-wider uppercase transition-all duration-300 text-charcoal/80 hover:text-charcoal hover:bg-charcoal/5"
-      >
-        Fashion
-      </button>
-      <button
-        data-filter="Lifestyle"
-        class="filter-btn px-4 sm:px-5 py-2 rounded-full text-xs sm:text-[13px] font-medium tracking-wider uppercase transition-all duration-300 text-charcoal/80 hover:text-charcoal hover:bg-charcoal/5"
-      >
-        Lifestyle
-      </button>
-      <button
-        data-filter="Editorial"
-        class="filter-btn px-4 sm:px-5 py-2 rounded-full text-xs sm:text-[13px] font-medium tracking-wider uppercase transition-all duration-300 text-charcoal/80 hover:text-charcoal hover:bg-charcoal/5"
-      >
-        Editorial
-      </button>
-    </nav>
   </header>
 
-  <!-- ========================================================= -->
-  <!-- 2. PREMIUM ASYMMETRIC EDITORIAL GALLERY GRID              -->
-  <!-- ========================================================= -->
-  <main id="gallery" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+  <!-- Main Content -->
+  <main class="container">
     
-    <!-- Section Meta Bar -->
-    <div class="flex items-center justify-between border-b border-charcoal/10 pb-3 mb-8">
-      <div class="flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-champagne"></span>
-        <span id="activeCategoryLabel" class="text-xs uppercase tracking-[0.2em] text-muted font-medium">
-          Showing All Curations
-        </span>
+    <!-- Featured Cover Story -->
+    <article class="featured-post" id="featured">
+      <div class="featured-img-wrap">
+        <img 
+          src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1000&q=80" 
+          alt="Minimalist luxury fashion editorial" 
+          class="featured-img"
+        />
       </div>
-      <span id="itemCountLabel" class="font-display text-lg tracking-wider text-charcoal">
-        09 STORIES
-      </span>
+      <div class="featured-content">
+        <span class="post-meta">Cover Story • Fashion & Style</span>
+        <h2 class="featured-title">The Art of Effortless Dressing: Building a Capsule Wardrobe That Lasts</h2>
+        <p class="post-excerpt">
+          Discover how clean silhouettes, tactile fabrics, and intentional neutral palettes transform everyday dressing into a refined personal signature.
+        </p>
+        <a href="#" class="read-link">Read Full Story →</a>
+      </div>
+    </article>
+
+    <!-- Latest Articles Grid -->
+    <div class="section-header" id="stories">
+      <h2>Latest Dispatches</h2>
+      <span>curated daily</span>
     </div>
 
-    <!-- Responsive Asymmetric Masonry / Bento Grid -->
-    <div
-      id="galleryGrid"
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 auto-rows-[340px] sm:auto-rows-[360px]"
-    >
-      <!-- Cards are dynamically injected by JavaScript for clean state & Lightbox sync -->
-    </div>
+    <section class="blog-grid" id="blogGrid">
+      <!-- Post 1 -->
+      <article class="blog-card" data-category="beauty">
+        <div class="card-img-wrap">
+          <img 
+            src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80" 
+            alt="Skincare essentials" 
+            class="card-img"
+          />
+        </div>
+        <div class="card-body">
+          <span class="post-meta">Beauty</span>
+          <h3 class="card-title">Skin Barrier Minimalism: Why Three Products Beat Ten</h3>
+          <p class="card-excerpt">
+            Stripping back overcrowded vanities in favor of barrier-first hydration, gentle actives, and glass-skin radiance.
+          </p>
+          <div class="card-footer">
+            <span>4 Min Read</span>
+            <a href="#" class="read-link">Read →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Post 2 -->
+      <article class="blog-card" data-category="fashion">
+        <div class="card-img-wrap">
+          <img 
+            src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80" 
+            alt="Street style tailoring" 
+            class="card-img"
+          />
+        </div>
+        <div class="card-body">
+          <span class="post-meta">Fashion</span>
+          <h3 class="card-title">Sculptural Tailoring & The Return of Statement Outerwear</h3>
+          <p class="card-excerpt">
+            From sharp-shouldered trench coats to fluid wide-leg trousers, explore the silhouettes defining the new season.
+          </p>
+          <div class="card-footer">
+            <span>5 Min Read</span>
+            <a href="#" class="read-link">Read →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Post 3 -->
+      <article class="blog-card" data-category="lifestyle">
+        <div class="card-img-wrap">
+          <img 
+            src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=800&q=80" 
+            alt="Slow morning ritual" 
+            class="card-img"
+          />
+        </div>
+        <div class="card-body">
+          <span class="post-meta">Lifestyle</span>
+          <h3 class="card-title">Slow Mornings: Designing a Sanctuary Space at Home</h3>
+          <p class="card-excerpt">
+            Warm lighting, ceramic pour-overs, and screen-free rituals that turn ordinary mornings into restorative moments.
+          </p>
+          <div class="card-footer">
+            <span>6 Min Read</span>
+            <a href="#" class="read-link">Read →</a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Newsletter Subscription -->
+    <section class="newsletter" id="subscribe">
+      <div class="newsletter-script">Join the inner circle</div>
+      <h3>The Weekly Saucegiver Edit</h3>
+      <p>Beauty notes, wardrobe edits, and lifestyle finds delivered straight to your inbox every Sunday.</p>
+      <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Welcome to saucegiver!');">
+        <input type="email" placeholder="Enter your email address" required />
+        <button type="submit">Subscribe</button>
+      </form>
+    </section>
+
   </main>
 
-  <!-- ========================================================= -->
-  <!-- 3. MINIMALIST EDITORIAL FOOTER                            -->
-  <!-- ========================================================= -->
-  <footer class="border-t border-charcoal/10 bg-cream/50 py-14 px-4 sm:px-6">
-    <div class="max-w-6xl mx-auto flex flex-col items-center text-center">
-      <!-- Brand Signature in Alex Brush -->
-      <a
-        href="#"
-        class="font-script text-5xl sm:text-6xl text-charcoal hover:text-champagne transition-colors duration-300"
-      >
-        saucegiver
-      </a>
-
-      <p class="mt-2 text-xs uppercase tracking-[0.25em] text-muted">
-        Beauty &nbsp;•&nbsp; Fashion &nbsp;•&nbsp; Lifestyle &nbsp;•&nbsp; Visual Culture
-      </p>
-
-      <div class="w-12 h-px bg-champagne/50 my-6"></div>
-
-      <div class="w-full flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted">
-        <p>© 2026 SAUCEGIVER. All rights reserved.</p>
-
-        <button
-          id="backToTopBtn"
-          type="button"
-          class="inline-flex items-center gap-2 uppercase tracking-[0.2em] text-charcoal hover:text-champagne transition-colors font-medium py-2 px-3 rounded-full"
-        >
-          <span>Back to Top</span>
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
-          </svg>
-        </button>
-      </div>
+  <!-- Footer -->
+  <footer>
+    <div class="footer-brand">saucegiver</div>
+    <div>© 2026 saucegiver. All rights reserved.</div>
+    <div class="socials">
+      <a href="#">Instagram</a>
+      <a href="#">Pinterest</a>
+      <a href="#">TikTok</a>
     </div>
   </footer>
 
-  <!-- ========================================================= -->
-  <!-- 4. INTERACTIVE FULL-SCREEN LIGHTBOX MODAL                 -->
-  <!-- ========================================================= -->
-  <div
-    id="lightboxModal"
-    role="dialog"
-    aria-modal="true"
-    aria-hidden="true"
-    class="fixed inset-0 z-50 hidden items-center justify-center bg-charcoal/90 backdrop-blur-md p-3 sm:p-6 md:p-10 opacity-0 transition-opacity duration-300"
-  >
-    <!-- Close Button -->
-    <button
-      id="closeLightboxBtn"
-      aria-label="Close modal"
-      class="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 flex items-center justify-center w-11 h-11 rounded-full bg-alabaster/10 hover:bg-champagne text-alabaster hover:text-charcoal border border-alabaster/20 transition-all duration-300"
-    >
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-      </svg>
-    </button>
-
-    <!-- Previous Button -->
-    <button
-      id="prevLightboxBtn"
-      aria-label="Previous image"
-      class="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-11 h-11 rounded-full bg-alabaster/10 hover:bg-champagne text-alabaster hover:text-charcoal border border-alabaster/20 transition-all duration-300"
-    >
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-      </svg>
-    </button>
-
-    <!-- Next Button -->
-    <button
-      id="nextLightboxBtn"
-      aria-label="Next image"
-      class="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-11 h-11 rounded-full bg-alabaster/10 hover:bg-champagne text-alabaster hover:text-charcoal border border-alabaster/20 transition-all duration-300"
-    >
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-      </svg>
-    </button>
-
-    <!-- Modal Content Card -->
-    <div
-      id="lightboxCard"
-      class="relative w-full max-w-5xl bg-alabaster text-charcoal rounded-2xl overflow-hidden shadow-2xl grid grid-cols-1 lg:grid-cols-12 max-h-[90vh]"
-    >
-      <!-- Left / Top Image Showcase -->
-      <div class="lg:col-span-7 bg-charcoal flex items-center justify-center overflow-hidden max-h-[50vh] lg:max-h-[82vh]">
-        <img
-          id="lightboxImg"
-          src=""
-          alt=""
-          class="w-full h-full object-cover"
-        />
-      </div>
-
-      <!-- Right / Bottom Editorial Story Panel -->
-      <div class="lg:col-span-5 p-6 sm:p-8 md:p-10 flex flex-col justify-between overflow-y-auto">
-        <div>
-          <div class="flex items-center justify-between gap-2 mb-4">
-            <span
-              id="lightboxCategory"
-              class="px-3 py-1 rounded-full bg-champagne/15 text-champagne text-[11px] font-semibold uppercase tracking-[0.2em]"
-            >
-              Category
-            </span>
-            <span id="lightboxNote" class="font-script text-2xl text-muted">
-              Autumn Note
-            </span>
-          </div>
-
-          <h2
-            id="lightboxTitle"
-            class="font-display text-4xl sm:text-5xl tracking-wide text-charcoal leading-none"
-          >
-            Editorial Title
-          </h2>
-
-          <div class="w-10 h-0.5 bg-champagne my-5"></div>
-
-          <p
-            id="lightboxDescription"
-            class="text-sm sm:text-base text-muted leading-relaxed"
-          >
-            Editorial story and insight snippet goes here.
-          </p>
-        </div>
-
-        <div class="mt-8 pt-5 border-t border-charcoal/10 flex items-center justify-between">
-          <div>
-            <span class="block text-[10px] uppercase tracking-[0.22em] text-muted">Curated By</span>
-            <span class="font-script text-2xl text-charcoal">saucegiver</span>
-          </div>
-          <span id="lightboxCounter" class="font-display text-xl tracking-widest text-muted">
-            01 / 09
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast Notification for Clipboard Share -->
-  <div
-    id="toastMessage"
-    class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 translate-y-3 transition-all duration-300 px-5 py-2.5 rounded-full bg-charcoal text-alabaster text-xs tracking-wider uppercase shadow-lg border border-champagne/30"
-  >
-    Lookbook link copied to clipboard
-  </div>
-
-  <!-- ========================================================= -->
-  <!-- JAVASCRIPT: DATA, FILTERING, RENDERING & LIGHTBOX         -->
-  <!-- ========================================================= -->
+  <!-- Interactive Category Filter Script -->
   <script>
-    // Curated Editorial Gallery Dataset
-    const galleryItems = [
-      {
-        id: 1,
-        title: 'GOLDEN HOUR DEW',
-        category: 'Beauty',
-        note: 'Skin Minimalism',
-        spanClass: 'lg:row-span-2', // Tall portrait bento card
-        image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=85',
-        description:
-          'Luminous, barrier-first skincare rituals designed to catch late-afternoon warmth. Layering lightweight peptide serums with sheer liquid bronzer creates an effortless glass-skin finish without heavy coverage.',
-      },
-      {
-        id: 2,
-        title: 'SCULPTED SILHOUETTES',
-        category: 'Fashion',
-        note: 'Autumn Tailoring',
-        spanClass: '',
-        image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=900&q=85',
-        description:
-          'Architectural shoulders meet fluid wool draping. This season’s quiet luxury uniform relies on tonal neutrals, crisp pleats, and intentional proportion play.',
-      },
-      {
-        id: 3,
-        title: 'SLOW MORNING RITUALS',
-        category: 'Lifestyle',
-        note: 'Mindful Spaces',
-        spanClass: '',
-        image: 'https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=900&q=85',
-        description:
-          'Designing sanctuary corners at home—unhurried espresso pours, linen textures, and warm travertine accents that anchor the day before stepping into the city.',
-      },
-      {
-        id: 4,
-        title: 'NOIR & CHAMPAGNE',
-        category: 'Editorial',
-        note: 'Cover Story 04',
-        spanClass: 'lg:col-span-2', // Wide editorial feature card
-        image: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=1200&q=85',
-        description:
-          'An exploration of contrast in modern eveningwear. Pairing raw silk textures with sharp monochrome framing celebrates timeless femininity with a rebellious edge.',
-      },
-      {
-        id: 5,
-        title: 'VELVET CRIMSON LIP',
-        category: 'Beauty',
-        note: 'Evening Palette',
-        spanClass: 'lg:row-span-2', // Tall portrait card
-        image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=85',
-        description:
-          'The return of blurred berry and classic crimson stains. Pressed gently onto the center of the lip with fingertips for a lived-in Parisian editorial allure.',
-      },
-      {
-        id: 6,
-        title: 'MONOCHROME EASE',
-        category: 'Fashion',
-        note: 'Capsule Edit',
-        spanClass: '',
-        image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=85',
-        description:
-          'Five foundational wardrobe pieces styled seven ways—proving that restraint in color palette unlocks maximum versatility across seasons.',
-      },
-      {
-        id: 7,
-        title: 'BOTANICAL INFUSIONS',
-        category: 'Lifestyle',
-        note: 'Scent & Atmosphere',
-        spanClass: '',
-        image: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=900&q=85',
-        description:
-          'Notes of smoked cedar, neroli blossom, and warm amber. How olfactory layering transforms everyday living spaces into sensory retreats.',
-      },
-      {
-        id: 8,
-        title: 'AVANT-GARDE MUSE',
-        category: 'Editorial',
-        note: 'Studio Monograph',
-        spanClass: '',
-        image: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=85',
-        description:
-          'Shot on medium-format film in natural studio daylight, capturing raw movement, unretouched texture, and expressive poise.',
-      },
-      {
-        id: 9,
-        title: 'EFFORTLESS DRAPE',
-        category: 'Fashion',
-        note: 'Resort Notes',
-        spanClass: '',
-        image: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=85',
-        description:
-          'Sun-bleached cottons and fluid silk slips tailored for warm coastal evenings and spontaneous weekend escapes.',
-      },
-    ];
+    const pills = document.querySelectorAll('.cat-pill');
+    const cards = document.querySelectorAll('.blog-card');
 
-    // State
-    let currentFilter = 'all';
-    let filteredItems = [...galleryItems];
-    let currentLightboxIndex = 0;
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
 
-    // DOM Elements
-    const galleryGrid = document.getElementById('galleryGrid');
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const activeCategoryLabel = document.getElementById('activeCategoryLabel');
-    const itemCountLabel = document.getElementById('itemCountLabel');
+        const filter = pill.getAttribute('data-filter');
 
-    // Lightbox Elements
-    const lightboxModal = document.getElementById('lightboxModal');
-    const lightboxImg = document.getElementById('lightboxImg');
-    const lightboxCategory = document.getElementById('lightboxCategory');
-    const lightboxNote = document.getElementById('lightboxNote');
-    const lightboxTitle = document.getElementById('lightboxTitle');
-    const lightboxDescription = document.getElementById('lightboxDescription');
-    const lightboxCounter = document.getElementById('lightboxCounter');
-    const closeLightboxBtn = document.getElementById('closeLightboxBtn');
-    const prevLightboxBtn = document.getElementById('prevLightboxBtn');
-    const nextLightboxBtn = document.getElementById('nextLightboxBtn');
-
-    /**
-     * Render Gallery Cards based on active filter
-     */
-    function renderGallery(filter = 'all') {
-      currentFilter = filter;
-      filteredItems =
-        filter === 'all'
-          ? [...galleryItems]
-          : galleryItems.filter((item) => item.category.toLowerCase() === filter.toLowerCase());
-
-      // Update Header Meta Labels
-      activeCategoryLabel.textContent =
-        filter === 'all' ? 'Showing All Curations' : `Filtered by ${filter}`;
-      const countStr = String(filteredItems.length).padStart(2, '0');
-      itemCountLabel.textContent = `${countStr} ${filteredItems.length === 1 ? 'STORY' : 'STORIES'}`;
-
-      // Clear & Render Grid
-      galleryGrid.innerHTML = '';
-
-      filteredItems.forEach((item, index) => {
-        const card = document.createElement('article');
-        // Keep asymmetric span classes when viewing "all" for editorial rhythm
-        const spanClasses = filter === 'all' ? item.spanClass : '';
-        card.className = `group relative rounded-2xl overflow-hidden bg-cream border border-charcoal/10 cursor-pointer shadow-sm hover:shadow-xl transition-shadow duration-500 animate-card ${spanClasses}`;
-        card.style.animationDelay = `${index * 65}ms`;
-
-        card.innerHTML = `
-          <img
-            src="${item.image}"
-            alt="${item.title}"
-            loading="lazy"
-            onerror="this.src='https://placehold.co/800x1000/141414/C5A059?text=SAUCEGIVER'"
-            class="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-          />
-
-          <!-- Subtle Permanent Vignette + Hover Deepening Gradient -->
-          <div class="absolute inset-0 bg-gradient-to-t from-charcoal/85 via-charcoal/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-500"></div>
-
-          <!-- Top Floating Category Pill -->
-          <div class="absolute top-4 left-4 right-4 flex items-center justify-between">
-            <span class="px-3 py-1 rounded-full bg-alabaster/90 backdrop-blur-md text-charcoal text-[10px] font-semibold uppercase tracking-[0.2em] shadow-sm">
-              ${item.category}
-            </span>
-
-            <span class="w-8 h-8 rounded-full bg-charcoal/60 backdrop-blur-md text-alabaster flex items-center justify-center opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 border border-alabaster/20">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-              </svg>
-            </span>
-          </div>
-
-          <!-- Bottom Editorial Caption -->
-          <div class="absolute bottom-0 inset-x-0 p-5 sm:p-6 flex flex-col justify-end transform translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
-            <span class="font-script text-2xl sm:text-3xl text-champagneLight leading-none mb-0.5">
-              ${item.note}
-            </span>
-            <h3 class="font-display text-3xl sm:text-4xl tracking-wider text-alabaster leading-none">
-              ${item.title}
-            </h3>
-            <p class="mt-2 text-xs text-alabaster/75 line-clamp-2 opacity-0 max-h-0 group-hover:opacity-100 group-hover:max-h-12 transition-all duration-300">
-              ${item.description}
-            </p>
-          </div>
-        `;
-
-        card.addEventListener('click', () => openLightbox(index));
-        galleryGrid.appendChild(card);
-      });
-    }
-
-    /**
-     * Filter Button Click Handlers
-     */
-    filterButtons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        filterButtons.forEach((b) => {
-          b.classList.remove('bg-charcoal', 'text-alabaster', 'shadow-sm');
-          b.classList.add('text-charcoal/80', 'hover:text-charcoal', 'hover:bg-charcoal/5');
+        cards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
         });
-
-        btn.classList.add('bg-charcoal', 'text-alabaster', 'shadow-sm');
-        btn.classList.remove('text-charcoal/80', 'hover:text-charcoal', 'hover:bg-charcoal/5');
-
-        const selectedFilter = btn.getAttribute('data-filter');
-        renderGallery(selectedFilter);
       });
     });
-
-    /**
-     * Lightbox Functions
-     */
-    function openLightbox(index) {
-      currentLightboxIndex = index;
-      updateLightboxContent();
-
-      lightboxModal.classList.remove('hidden');
-      lightboxModal.classList.add('flex');
-      lightboxModal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-
-      requestAnimationFrame(() => {
-        lightboxModal.classList.remove('opacity-0');
-        lightboxModal.classList.add('opacity-100');
-      });
-    }
-
-    function closeLightbox() {
-      lightboxModal.classList.remove('opacity-100');
-      lightboxModal.classList.add('opacity-0');
-      lightboxModal.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-
-      setTimeout(() => {
-        lightboxModal.classList.add('hidden');
-        lightboxModal.classList.remove('flex');
-      }, 280);
-    }
-
-    function updateLightboxContent() {
-      const item = filteredItems[currentLightboxIndex];
-      if (!item) return;
-
-      lightboxImg.src = item.image;
-      lightboxImg.alt = item.title;
-      lightboxCategory.textContent = item.category;
-      lightboxNote.textContent = item.note;
-      lightboxTitle.textContent = item.title;
-      lightboxDescription.textContent = item.description;
-
-      const currentStr = String(currentLightboxIndex + 1).padStart(2, '0');
-      const totalStr = String(filteredItems.length).padStart(2, '0');
-      lightboxCounter.textContent = `${currentStr} / ${totalStr}`;
-    }
-
-    function showNextItem() {
-      currentLightboxIndex = (currentLightboxIndex + 1) % filteredItems.length;
-      updateLightboxContent();
-    }
-
-    function showPrevItem() {
-      currentLightboxIndex =
-        (currentLightboxIndex - 1 + filteredItems.length) % filteredItems.length;
-      updateLightboxContent();
-    }
-
-    // Lightbox Event Listeners
-    closeLightboxBtn.addEventListener('click', closeLightbox);
-    nextLightboxBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      showNextItem();
-    });
-    prevLightboxBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      showPrevItem();
-    });
-
-    // Close on Backdrop Click
-    lightboxModal.addEventListener('click', (e) => {
-      if (e.target === lightboxModal) {
-        closeLightbox();
-      }
-    });
-
-    // Keyboard Navigation (Escape, ArrowLeft, ArrowRight)
-    document.addEventListener('keydown', (e) => {
-      if (lightboxModal.classList.contains('hidden')) return;
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowRight') showNextItem();
-      if (e.key === 'ArrowLeft') showPrevItem();
-    });
-
-    // Share Lookbook Button (Uses execCommand fallback for iframe compatibility)
-    const shareProfileBtn = document.getElementById('shareProfileBtn');
-    const toastMessage = document.getElementById('toastMessage');
-
-    shareProfileBtn.addEventListener('click', () => {
-      const tempInput = document.createElement('input');
-      tempInput.value = window.location.href;
-      document.body.appendChild(tempInput);
-      tempInput.select();
-      try {
-        document.execCommand('copy');
-      } catch (err) {
-        // Fallback silently handled
-      }
-      document.body.removeChild(tempInput);
-
-      toastMessage.classList.remove('opacity-0', 'translate-y-3');
-      toastMessage.classList.add('opacity-100', 'translate-y-0');
-
-      setTimeout(() => {
-        toastMessage.classList.add('opacity-0', 'translate-y-3');
-        toastMessage.classList.remove('opacity-100', 'translate-y-0');
-      }, 2400);
-    });
-
-    // Smooth Back to Top
-    document.getElementById('backToTopBtn').addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Initial Render
-    renderGallery('all');
   </script>
 </body>
 </html>
