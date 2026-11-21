@@ -19,10 +19,10 @@
   --pink: #f5a6c5;
   --deep: #e85d99;
   --light: #fff0f6;
-  --white: #ffffff;
+  --white: #fff;
   --text: #49343f;
   --muted: #927d88;
-  --glass: rgba(255,255,255,.65);
+  --glass: rgba(255,255,255,.68);
   --border: rgba(255,255,255,.85);
 }
 
@@ -60,88 +60,107 @@ header {
   align-items: center;
   padding: 18px 0;
   gap: 15px;
+  flex-wrap: wrap;
 }
 
 .logo {
   font-family: 'Bebas Neue',sans-serif;
-  font-size: 38px;
+  font-size: 39px;
+  color: var(--deep);
   letter-spacing: 2px;
-  color: var(--deep);
 }
 
-.header-right {
+.header-socials {
   display: flex;
-  align-items: center;
-  gap: 20px;
+  gap: 12px;
 }
 
-.nav-links {
-  display: flex;
-  gap: 18px;
-  font-size: 11px;
-  font-weight: 600;
-}
-
-.nav-links a:hover {
-  color: var(--deep);
-}
-
-.socials {
-  display: flex;
-  gap: 10px;
-}
-
-.socials a {
-  width: 35px;
-  height: 35px;
+.header-socials a {
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
   display: grid;
   place-items: center;
-  border-radius: 50%;
+  background: var(--glass);
   color: var(--deep);
+  border: 1px solid var(--border);
+  transition: .3s;
+}
+
+.header-socials a:hover {
+  background: var(--deep);
+  color: white;
+}
+
+/* NAVIGATION */
+
+nav {
   background: var(--glass);
   border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 15px 20px;
+  display: flex;
+  gap: 22px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
 }
 
-/* HERO */
+nav a {
+  font-size: 11px;
+  font-weight: 600;
+  color: #735c69;
+  transition: .3s;
+}
 
-.hero {
+nav a:hover,
+nav a.active {
+  color: var(--deep);
+}
+
+/* STORE HERO */
+
+.store-hero {
+  margin-top: 25px;
   height: 300px;
-  padding: 35px;
+  border-radius: 23px;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg,rgba(45,10,30,.65),rgba(45,10,30,.05)),
+    url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1500')
+    center/cover;
   display: flex;
   align-items: center;
-  border-radius: 24px;
-  overflow: hidden;
+  padding: 35px;
   color: white;
-  background:
-    linear-gradient(90deg,rgba(55,15,35,.65),rgba(55,15,35,.05)),
-    url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1500')
-    center/cover;
 }
 
-.hero-content {
-  max-width: 500px;
+.store-hero-content {
+  max-width: 550px;
 }
 
-.hero h1 {
+.store-hero h1 {
   font-family: 'Bebas Neue',sans-serif;
-  font-size: clamp(55px,8vw,85px);
+  font-size: clamp(48px,8vw,80px);
   line-height: .95;
   letter-spacing: 2px;
 }
 
-.hero p {
-  font-size: 12px;
+.store-hero p {
   margin-top: 15px;
-  max-width: 360px;
+  font-size: 12px;
+  max-width: 350px;
 }
 
-.hero-btn {
+.store-hero a {
   display: inline-block;
-  margin-top: 20px;
-  padding: 11px 23px;
   background: white;
   color: var(--deep);
+  padding: 11px 23px;
   border-radius: 30px;
+  margin-top: 20px;
   font-size: 11px;
   font-weight: 600;
 }
@@ -150,159 +169,87 @@ header {
 
 .intro {
   text-align: center;
-  padding: 45px 10px 25px;
+  margin: 45px auto 30px;
 }
 
 .intro h2 {
   font-family: 'Bebas Neue',sans-serif;
   font-size: 42px;
+  letter-spacing: 1px;
 }
 
 .intro span {
   font-family: 'Alex Brush',cursive;
+  font-size: 27px;
   color: var(--deep);
-  font-size: 30px;
 }
 
 .intro p {
-  font-size: 12px;
+  max-width: 550px;
+  margin: 10px auto;
   color: var(--muted);
-  margin-top: 5px;
+  font-size: 12px;
 }
 
-/* SEARCH */
+/* FILTERS */
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 30px 0;
+}
 
 .search-box {
-  max-width: 500px;
-  margin: 20px auto;
-  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  width: 280px;
+  border-radius: 30px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+}
+
+.search-box i {
+  color: var(--deep);
 }
 
 .search-box input {
   width: 100%;
-  padding: 14px 45px 14px 20px;
-  border-radius: 30px;
+  border: none;
   outline: none;
-  border: 1px solid var(--border);
-  background: var(--glass);
+  background: transparent;
+  font-size: 11px;
   color: var(--text);
-  font-size: 12px;
 }
 
-.search-box i {
-  position: absolute;
-  right: 18px;
-  top: 17px;
-  color: var(--deep);
-}
-
-/* CATEGORIES */
-
-.categories {
+.filters {
   display: flex;
-  justify-content: center;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
-  margin: 25px 0 35px;
 }
 
-.category-btn {
+.filter-btn {
+  padding: 9px 16px;
   border: 1px solid var(--border);
-  background: var(--glass);
-  padding: 9px 19px;
   border-radius: 30px;
-  color: var(--text);
+  background: var(--glass);
+  color: var(--muted);
   font-size: 10px;
-  font-weight: 600;
   cursor: pointer;
   transition: .3s;
 }
 
-.category-btn:hover,
-.category-btn.active {
+.filter-btn.active,
+.filter-btn:hover {
   background: var(--deep);
   color: white;
 }
 
-/* SECTION HEADING */
-
-.section-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.section-heading h2 {
-  font-family: 'Bebas Neue',sans-serif;
-  font-size: 35px;
-}
-
-.section-heading span {
-  font-family: 'Alex Brush',cursive;
-  color: var(--deep);
-  font-size: 25px;
-}
-
-/* FEATURED PRODUCT */
-
-.featured {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  overflow: hidden;
-  border-radius: 22px;
-  background: var(--glass);
-  border: 1px solid var(--border);
-  margin-bottom: 45px;
-  backdrop-filter: blur(15px);
-}
-
-.featured img {
-  width: 100%;
-  height: 330px;
-  object-fit: cover;
-}
-
-.featured-content {
-  padding: 35px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.featured-content small {
-  color: var(--deep);
-  font-weight: 600;
-  letter-spacing: 2px;
-  font-size: 10px;
-}
-
-.featured-content h3 {
-  font-family: 'Bebas Neue',sans-serif;
-  font-size: 42px;
-  line-height: 1;
-  margin: 15px 0;
-}
-
-.featured-content p {
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.8;
-}
-
-.shop-btn {
-  display: inline-block;
-  padding: 12px 25px;
-  background: var(--deep);
-  color: white;
-  border-radius: 30px;
-  margin-top: 20px;
-  font-size: 11px;
-  font-weight: 600;
-}
-
-/* PRODUCT GRID */
+/* PRODUCTS */
 
 .product-grid {
   display: grid;
@@ -311,13 +258,12 @@ header {
 }
 
 .product-card {
-  overflow: hidden;
   background: var(--glass);
   border: 1px solid var(--border);
   border-radius: 18px;
-  backdrop-filter: blur(15px);
+  overflow: hidden;
+  backdrop-filter: blur(12px);
   transition: .3s;
-  display: block;
 }
 
 .product-card:hover {
@@ -326,116 +272,111 @@ header {
 }
 
 .product-image {
-  position: relative;
+  height: 220px;
   overflow: hidden;
+  background: #fce2ed;
 }
 
 .product-image img {
   width: 100%;
-  height: 220px;
+  height: 100%;
   object-fit: cover;
-  transition: .4s;
+  transition: .5s;
 }
 
 .product-card:hover .product-image img {
-  transform: scale(1.07);
-}
-
-.product-label {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background: white;
-  color: var(--deep);
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-size: 9px;
-  font-weight: 600;
+  transform: scale(1.06);
 }
 
 .product-info {
   padding: 17px;
 }
 
-.product-info small {
+.product-category {
   color: var(--deep);
   font-size: 9px;
-  letter-spacing: 1px;
   font-weight: 600;
+  letter-spacing: 1px;
 }
 
 .product-info h3 {
   font-family: 'Bebas Neue',sans-serif;
   font-size: 25px;
-  line-height: 1.1;
   margin: 8px 0;
+  line-height: 1.1;
 }
 
 .product-info p {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--muted);
-  line-height: 1.7;
+  line-height: 1.8;
+  min-height: 60px;
 }
 
-.product-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.product-btn {
+  display: block;
+  text-align: center;
   margin-top: 15px;
-  gap: 5px;
+  background: var(--deep);
+  color: white;
+  padding: 11px;
+  border-radius: 30px;
+  font-size: 10px;
+  font-weight: 600;
+  transition: .3s;
 }
 
-.product-bottom strong {
-  color: var(--deep);
+.product-btn:hover {
+  background: #c83d7a;
+  letter-spacing: .5px;
+}
+
+/* EMPTY SEARCH */
+
+.empty-message {
+  display: none;
+  text-align: center;
+  padding: 50px 10px;
+  color: var(--muted);
   font-size: 13px;
 }
 
-.product-bottom span {
-  color: var(--deep);
-  font-size: 11px;
-  font-weight: 600;
-}
+/* PROMOTION */
 
-/* ADVERTISEMENT */
-
-.ad {
-  margin: 50px 0;
-  border: 1px dashed #e7a0bd;
-  background: rgba(255,255,255,.4);
-  padding: 12px;
-  border-radius: 18px;
+.promo {
+  margin: 55px 0;
+  padding: 35px;
   text-align: center;
+  border-radius: 22px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(15px);
 }
 
-.ad small {
-  display: block;
+.promo h2 {
+  font-family: 'Bebas Neue',sans-serif;
+  font-size: 35px;
+}
+
+.promo p {
+  font-size: 11px;
   color: var(--muted);
-  font-size: 9px;
-  letter-spacing: 3px;
-  margin-bottom: 10px;
-}
-
-.ad img {
-  width: 100%;
-  max-height: 220px;
-  object-fit: cover;
-  border-radius: 12px;
+  margin-top: 8px;
 }
 
 /* FOOTER */
 
 footer {
-  margin-top: 60px;
-  text-align: center;
   padding: 40px 20px;
+  text-align: center;
   background: rgba(255,255,255,.55);
   border-top: 1px solid white;
 }
 
 footer h2 {
   font-family: 'Bebas Neue',sans-serif;
+  font-size: 40px;
   color: var(--deep);
-  font-size: 38px;
 }
 
 footer p {
@@ -444,7 +385,16 @@ footer p {
   margin: 10px 0;
 }
 
-footer a {
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.footer-links a {
+  font-size: 10px;
   color: var(--deep);
   font-weight: 600;
 }
@@ -453,7 +403,13 @@ footer a {
   display: flex;
   justify-content: center;
   gap: 20px;
-  margin: 20px;
+  color: var(--deep);
+  margin: 20px 0;
+}
+
+.copyright {
+  font-size: 10px;
+  margin-top: 25px;
 }
 
 /* RESPONSIVE */
@@ -465,25 +421,13 @@ footer a {
 }
 
 @media(max-width:650px) {
-  .nav-links {
-    display: none;
-  }
-
-  .featured {
-    grid-template-columns: 1fr;
-  }
-
-  .featured img {
-    height: 240px;
-  }
-
   .product-grid {
     grid-template-columns: repeat(2,1fr);
-    gap: 13px;
+    gap: 12px;
   }
 
-  .product-image img {
-    height: 170px;
+  .product-image {
+    height: 165px;
   }
 
   .product-info {
@@ -498,15 +442,31 @@ footer a {
     font-size: 10px;
   }
 
-  .hero {
+  .store-hero {
     height: 260px;
     padding: 22px;
+  }
+
+  nav {
+    gap: 14px;
+  }
+
+  nav a {
+    font-size: 10px;
+  }
+
+  .search-box {
+    width: 100%;
   }
 }
 
 @media(max-width:380px) {
   .product-grid {
     grid-template-columns: 1fr;
+  }
+
+  .product-image {
+    height: 230px;
   }
 }
 </style>
@@ -517,358 +477,279 @@ footer a {
 <div class="container">
 
 <!-- HEADER -->
+
 <header>
 
   <a href="index.html" class="logo">SAUCEGIVER.</a>
 
-  <div class="header-right">
-
-    <nav class="nav-links">
-      <a href="index.html">HOME</a>
-      <a href="blog.html">BLOG</a>
-      <a href="store.html">STORE</a>
-    </nav>
-
-    <div class="socials">
-      <a href="https://facebook.com/"><i class="fab fa-facebook-f"></i></a>
-      <a href="https://pinterest.com/"><i class="fab fa-pinterest-p"></i></a>
-      <a href="https://instagram.com/"><i class="fab fa-instagram"></i></a>
-    </div>
-
+  <div class="header-socials">
+    <a href="https://facebook.com/" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://pinterest.com/" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+    <a href="https://instagram.com/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
   </div>
 
 </header>
 
+<!-- NAVIGATION -->
+
+<nav>
+  <a href="index.html">HOME</a>
+  <a href="index.html#blogs">BLOGS</a>
+  <a href="store.html" class="active">STORE</a>
+  <a href="privacy.html">PRIVACY POLICY</a>
+  <a href="terms.html">TERMS & CONDITIONS</a>
+  <a href="disclosure.html">AFFILIATE DISCLOSURE</a>
+</nav>
+
 <!-- HERO -->
-<section class="hero">
 
-  <div class="hero-content">
+<section class="store-hero">
 
-    <h1>THE SAUCEGIVER STORE.</h1>
+  <div class="store-hero-content">
+
+    <h1>THE SAUCEGIVER<br>COLLECTION.</h1>
 
     <p>
-      Discover products, explore your favorites and
-      find things worth adding to your collection.
+      Discover products, find inspiration and explore
+      things worth adding to your everyday life.
     </p>
 
-    <a href="#products" class="hero-btn">
-      EXPLORE PRODUCTS ↗
-    </a>
+    <a href="#products">EXPLORE COLLECTION ↗</a>
 
   </div>
 
 </section>
 
 <!-- INTRO -->
+
 <section class="intro">
 
-  <h2>DISCOVER YOUR NEXT FAVORITE</h2>
+  <h2>EXPLORE OUR STORE</h2>
 
-  <span>Curated with love</span>
+  <span>Something worth discovering</span>
 
-  <p>Explore our handpicked collection of interesting finds.</p>
+  <p>
+    A curated collection of interesting finds,
+    everyday essentials and products we think
+    deserve your attention.
+  </p>
 
 </section>
 
-<!-- SEARCH -->
-<div class="search-box">
+<!-- TOOLBAR -->
 
-  <input
-    type="text"
-    id="searchInput"
-    placeholder="Search products..."
-  >
+<section class="toolbar">
 
-  <i class="fas fa-search"></i>
+  <div class="search-box">
+    <i class="fas fa-search"></i>
+    <input
+      type="search"
+      id="searchInput"
+      placeholder="Search products..."
+      aria-label="Search products">
+  </div>
 
-</div>
+  <div class="filters">
 
-<!-- CATEGORIES -->
-<div class="categories">
+    <button class="filter-btn active" data-category="all">ALL</button>
 
-  <button class="category-btn active" data-category="all">
-    ALL PRODUCTS
-  </button>
+    <button class="filter-btn" data-category="fashion">FASHION</button>
 
-  <button class="category-btn" data-category="fashion">
-    FASHION
-  </button>
+    <button class="filter-btn" data-category="beauty">BEAUTY</button>
 
-  <button class="category-btn" data-category="beauty">
-    BEAUTY
-  </button>
+    <button class="filter-btn" data-category="lifestyle">LIFESTYLE</button>
 
-  <button class="category-btn" data-category="lifestyle">
-    LIFESTYLE
-  </button>
-
-  <button class="category-btn" data-category="accessories">
-    ACCESSORIES
-  </button>
-
-</div>
-
-<!-- FEATURED PRODUCT -->
-<div class="section-heading">
-
-  <h2>EDITOR'S PICK</h2>
-
-  <span>Featured product</span>
-
-</div>
-
-<section class="featured">
-
-  <img
-    src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=900"
-    alt="Featured fashion collection"
-  >
-
-  <div class="featured-content">
-
-    <small>FEATURED COLLECTION</small>
-
-    <h3>THE EVERYDAY STYLE COLLECTION</h3>
-
-    <p>
-      Discover versatile fashion pieces designed
-      for everyday styling. Explore different looks
-      and find the perfect addition to your wardrobe.
-    </p>
-
-    <a href="https://example.com/featured"
-       class="shop-btn">
-      EXPLORE COLLECTION ↗
-    </a>
+    <button class="filter-btn" data-category="tech">TECH</button>
 
   </div>
 
 </section>
 
-<!-- PRODUCTS -->
-<div class="section-heading" id="products">
+<!-- PRODUCT GRID -->
 
-  <h2>EXPLORE PRODUCTS</h2>
-
-  <span>Find your favorites</span>
-
-</div>
-
-<section class="product-grid" id="productGrid">
+<section class="product-grid" id="products">
 
   <!-- PRODUCT 1 -->
-  <a class="product-card"
-     href="https://example.com/product1"
-     target="_blank"
-     data-category="fashion">
+  <article class="product-card" data-category="fashion">
 
-    <div class="product-image">
-      <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600" alt="Sneakers">
-      <span class="product-label">POPULAR</span>
-    </div>
+    <a href="https://example.com/product1" target="_blank" rel="sponsored noopener noreferrer">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700" alt="Fashion sneakers">
+      </div>
+    </a>
 
     <div class="product-info">
-      <small>FASHION</small>
-      <h3>CLASSIC SNEAKERS</h3>
-      <p>Comfortable everyday footwear with a clean and modern design.</p>
-
-      <div class="product-bottom">
-        <strong>View price</strong>
-        <span>EXPLORE ↗</span>
-      </div>
+      <span class="product-category">FASHION</span>
+      <h3>EVERYDAY SNEAKERS</h3>
+      <p>Comfortable everyday footwear with a modern and versatile design.</p>
+      <a href="https://example.com/product1" target="_blank" rel="sponsored noopener noreferrer" class="product-btn">VIEW PRODUCT ↗</a>
     </div>
 
-  </a>
+  </article>
 
   <!-- PRODUCT 2 -->
-  <a class="product-card"
-     href="https://example.com/product2"
-     target="_blank"
-     data-category="beauty">
+  <article class="product-card" data-category="beauty">
 
-    <div class="product-image">
-      <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600" alt="Skincare">
-      <span class="product-label">TRENDING</span>
-    </div>
+    <a href="https://example.com/product2" target="_blank" rel="sponsored noopener noreferrer">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=700" alt="Beauty skincare">
+      </div>
+    </a>
 
     <div class="product-info">
-      <small>BEAUTY</small>
+      <span class="product-category">BEAUTY</span>
       <h3>SKINCARE ESSENTIALS</h3>
-      <p>A collection of skincare essentials for your daily routine.</p>
-
-      <div class="product-bottom">
-        <strong>View price</strong>
-        <span>EXPLORE ↗</span>
-      </div>
+      <p>A collection of beauty essentials for your everyday routine.</p>
+      <a href="https://example.com/product2" target="_blank" rel="sponsored noopener noreferrer" class="product-btn">VIEW PRODUCT ↗</a>
     </div>
 
-  </a>
+  </article>
 
   <!-- PRODUCT 3 -->
-  <a class="product-card"
-     href="https://example.com/product3"
-     target="_blank"
-     data-category="accessories">
+  <article class="product-card" data-category="lifestyle">
 
-    <div class="product-image">
-      <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600" alt="Watch">
-    </div>
+    <a href="https://example.com/product3" target="_blank" rel="sponsored noopener noreferrer">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?w=700" alt="Lifestyle accessories">
+      </div>
+    </a>
 
     <div class="product-info">
-      <small>ACCESSORIES</small>
-      <h3>MINIMAL WATCH</h3>
-      <p>A timeless accessory for a simple and elegant look.</p>
-
-      <div class="product-bottom">
-        <strong>View price</strong>
-        <span>EXPLORE ↗</span>
-      </div>
+      <span class="product-category">LIFESTYLE</span>
+      <h3>MINIMAL ACCESSORIES</h3>
+      <p>Simple accessories designed to complement everyday living.</p>
+      <a href="https://example.com/product3" target="_blank" rel="sponsored noopener noreferrer" class="product-btn">VIEW PRODUCT ↗</a>
     </div>
 
-  </a>
+  </article>
 
   <!-- PRODUCT 4 -->
-  <a class="product-card"
-     href="https://example.com/product4"
-     target="_blank"
-     data-category="lifestyle">
+  <article class="product-card" data-category="tech">
 
-    <div class="product-image">
-      <img src="https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?w=600" alt="Interior">
-    </div>
+    <a href="https://example.com/product4" target="_blank" rel="sponsored noopener noreferrer">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=700" alt="Headphones">
+      </div>
+    </a>
 
     <div class="product-info">
-      <small>LIFESTYLE</small>
-      <h3>HOME DECOR</h3>
-      <p>Simple decorative pieces to enhance your living space.</p>
-
-      <div class="product-bottom">
-        <strong>View price</strong>
-        <span>EXPLORE ↗</span>
-      </div>
+      <span class="product-category">TECH</span>
+      <h3>WIRELESS HEADPHONES</h3>
+      <p>Modern audio accessories for entertainment and productivity.</p>
+      <a href="https://example.com/product4" target="_blank" rel="sponsored noopener noreferrer" class="product-btn">VIEW PRODUCT ↗</a>
     </div>
 
-  </a>
+  </article>
 
   <!-- PRODUCT 5 -->
-  <a class="product-card"
-     href="https://example.com/product5"
-     target="_blank"
-     data-category="fashion">
+  <article class="product-card" data-category="fashion">
 
-    <div class="product-image">
-      <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=600" alt="Jeans">
-    </div>
+    <a href="https://example.com/product5" target="_blank" rel="sponsored noopener noreferrer">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=700" alt="Fashion handbag">
+      </div>
+    </a>
 
     <div class="product-info">
-      <small>FASHION</small>
-      <h3>EVERYDAY DENIM</h3>
-      <p>Versatile denim for casual everyday outfits.</p>
-
-      <div class="product-bottom">
-        <strong>View price</strong>
-        <span>EXPLORE ↗</span>
-      </div>
+      <span class="product-category">FASHION</span>
+      <h3>CLASSIC HANDBAG</h3>
+      <p>A timeless handbag for casual outings and everyday styling.</p>
+      <a href="https://example.com/product5" target="_blank" rel="sponsored noopener noreferrer" class="product-btn">VIEW PRODUCT ↗</a>
     </div>
 
-  </a>
+  </article>
 
   <!-- PRODUCT 6 -->
-  <a class="product-card"
-     href="https://example.com/product6"
-     target="_blank"
-     data-category="accessories">
+  <article class="product-card" data-category="beauty">
 
-    <div class="product-image">
-      <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600" alt="Headphones">
-    </div>
+    <a href="https://example.com/product6" target="_blank" rel="sponsored noopener noreferrer">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=700" alt="Makeup products">
+      </div>
+    </a>
 
     <div class="product-info">
-      <small>ACCESSORIES</small>
-      <h3>WIRELESS HEADPHONES</h3>
-      <p>Enjoy music with a modern everyday audio accessory.</p>
-
-      <div class="product-bottom">
-        <strong>View price</strong>
-        <span>EXPLORE ↗</span>
-      </div>
+      <span class="product-category">BEAUTY</span>
+      <h3>BEAUTY COLLECTION</h3>
+      <p>Beauty products and essentials for your personal collection.</p>
+      <a href="https://example.com/product6" target="_blank" rel="sponsored noopener noreferrer" class="product-btn">VIEW PRODUCT ↗</a>
     </div>
 
-  </a>
+  </article>
 
   <!-- PRODUCT 7 -->
-  <a class="product-card"
-     href="https://example.com/product7"
-     target="_blank"
-     data-category="beauty">
+  <article class="product-card" data-category="lifestyle">
 
-    <div class="product-image">
-      <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600" alt="Makeup">
-    </div>
+    <a href="https://example.com/product7" target="_blank" rel="sponsored noopener noreferrer">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=700" alt="Home decor">
+      </div>
+    </a>
 
     <div class="product-info">
-      <small>BEAUTY</small>
-      <h3>BEAUTY COLLECTION</h3>
-      <p>Beauty products to explore and add to your collection.</p>
-
-      <div class="product-bottom">
-        <strong>View price</strong>
-        <span>EXPLORE ↗</span>
-      </div>
+      <span class="product-category">LIFESTYLE</span>
+      <h3>HOME DECOR FINDS</h3>
+      <p>Beautiful decorative ideas for a more personal living space.</p>
+      <a href="https://example.com/product7" target="_blank" rel="sponsored noopener noreferrer" class="product-btn">VIEW PRODUCT ↗</a>
     </div>
 
-  </a>
+  </article>
 
   <!-- PRODUCT 8 -->
-  <a class="product-card"
-     href="https://example.com/product8"
-     target="_blank"
-     data-category="lifestyle">
+  <article class="product-card" data-category="tech">
 
-    <div class="product-image">
-      <img src="https://images.unsplash.com/photo-1503602642458-232111445657?w=600" alt="Furniture">
-    </div>
+    <a href="https://example.com/product8" target="_blank" rel="sponsored noopener noreferrer">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=700" alt="Smart watch">
+      </div>
+    </a>
 
     <div class="product-info">
-      <small>LIFESTYLE</small>
-      <h3>MODERN HOME CHAIR</h3>
-      <p>A stylish furniture piece for a modern interior.</p>
-
-      <div class="product-bottom">
-        <strong>View price</strong>
-        <span>EXPLORE ↗</span>
-      </div>
+      <span class="product-category">TECH</span>
+      <h3>SMART WATCH</h3>
+      <p>A modern wearable accessory for daily convenience.</p>
+      <a href="https://example.com/product8" target="_blank" rel="sponsored noopener noreferrer" class="product-btn">VIEW PRODUCT ↗</a>
     </div>
 
-  </a>
+  </article>
 
 </section>
 
-<!-- ADVERTISEMENT -->
-<section class="ad">
+<div class="empty-message" id="emptyMessage">
+  No products found. Try another search.
+</div>
 
-  <small>ADVERTISEMENT</small>
+<!-- PROMOTION -->
 
-  <a href="https://example.com/advertisement"
-     target="_blank"
-     rel="noopener noreferrer">
+<section class="promo">
 
-    <img
-      src="https://placehold.co/1200x300/f5a6c5/ffffff?text=YOUR+ADVERTISEMENT+HERE"
-      alt="Advertisement">
+  <h2>FIND YOUR NEXT FAVOURITE.</h2>
 
-  </a>
+  <p>
+    Discover new finds, explore ideas and make
+    your everyday choices more interesting.
+  </p>
 
 </section>
 
 </div>
 
 <!-- FOOTER -->
+
 <footer>
 
   <h2>SAUCEGIVER.</h2>
 
-  <p>Discover. Explore. Find your favorites.</p>
+  <p>Stories, ideas and products worth sharing.</p>
+
+  <div class="footer-links">
+    <a href="index.html">HOME</a>
+    <a href="index.html#blogs">BLOGS</a>
+    <a href="store.html">STORE</a>
+    <a href="privacy.html">PRIVACY POLICY</a>
+    <a href="terms.html">TERMS & CONDITIONS</a>
+    <a href="disclosure.html">AFFILIATE DISCLOSURE</a>
+  </div>
 
   <div class="footer-socials">
     <a href="https://facebook.com/"><i class="fab fa-facebook-f"></i></a>
@@ -883,60 +764,62 @@ footer a {
     </a>
   </p>
 
-  <p>© 2026 Saucegiver. All rights reserved.</p>
+  <div class="copyright">
+    © 2026 Saucegiver. All rights reserved.
+  </div>
 
 </footer>
 
-<!-- SEARCH AND FILTER SCRIPT -->
+<!-- SEARCH AND FILTER JAVASCRIPT -->
+
 <script>
 
 const searchInput = document.getElementById("searchInput");
+const filterButtons = document.querySelectorAll(".filter-btn");
+const productCards = document.querySelectorAll(".product-card");
+const emptyMessage = document.getElementById("emptyMessage");
 
-const products = document.querySelectorAll(".product-card");
-
-const categoryButtons =
-document.querySelectorAll(".category-btn");
-
-let selectedCategory = "all";
+let activeCategory = "all";
 
 function filterProducts() {
 
-  const searchValue =
-    searchInput.value.toLowerCase();
+  const searchValue = searchInput.value.toLowerCase();
+  let visibleCount = 0;
 
-  products.forEach(product => {
+  productCards.forEach(card => {
 
-    const category = product.dataset.category;
-
-    const text = product.innerText.toLowerCase();
+    const category = card.dataset.category;
+    const text = card.innerText.toLowerCase();
 
     const matchesCategory =
-      selectedCategory === "all" ||
-      category === selectedCategory;
+      activeCategory === "all" || category === activeCategory;
 
-    const matchesSearch =
-      text.includes(searchValue);
+    const matchesSearch = text.includes(searchValue);
 
-    product.style.display =
-      matchesCategory && matchesSearch
-      ? "block"
-      : "none";
+    if(matchesCategory && matchesSearch) {
+      card.style.display = "";
+      visibleCount++;
+    } else {
+      card.style.display = "none";
+    }
 
   });
 
+  emptyMessage.style.display =
+    visibleCount === 0 ? "block" : "none";
 }
 
-categoryButtons.forEach(button => {
+filterButtons.forEach(button => {
 
   button.addEventListener("click", () => {
 
-    categoryButtons.forEach(btn =>
+    filterButtons.forEach(btn =>
       btn.classList.remove("active")
     );
 
     button.classList.add("active");
 
-    selectedCategory = button.dataset.category;
+    activeCategory = button.dataset.category;
 
     filterProducts();
 
