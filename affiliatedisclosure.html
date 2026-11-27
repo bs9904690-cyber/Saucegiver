@@ -1,0 +1,974 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Affiliate Disclosure | SauceGiver</title>
+
+<meta name="description" content="Read the SauceGiver Affiliate Disclosure to understand how affiliate links and commissions work on our website.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Alex+Brush&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root {
+  --pink:#ff78ad;
+  --deep:#e94691;
+  --light:#fff0f6;
+  --white:#ffffff;
+  --text:#51263c;
+  --muted:#916278;
+}
+
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html {
+  scroll-behavior:smooth;
+}
+
+body {
+  font-family:'Poppins',sans-serif;
+  color:var(--text);
+  background:#fff1f7;
+  overflow-x:hidden;
+}
+
+/* BACKGROUND */
+
+.background {
+  position:fixed;
+  inset:0;
+  z-index:-5;
+  background:
+    linear-gradient(135deg,
+    rgba(255,232,243,.85),
+    rgba(255,255,255,.88)),
+    url('YOUR_BACKGROUND_IMAGE_URL')
+    center/cover no-repeat;
+}
+
+.mesh {
+  position:fixed;
+  width:350px;
+  height:350px;
+  border-radius:50%;
+  filter:blur(100px);
+  opacity:.4;
+  z-index:-2;
+  pointer-events:none;
+}
+
+.mesh.one {
+  background:#ff69a9;
+  top:5%;
+  left:-180px;
+}
+
+.mesh.two {
+  background:#f6a8cf;
+  right:-180px;
+  top:50%;
+}
+
+.mesh.three {
+  background:#ffb6d5;
+  bottom:-150px;
+  left:25%;
+}
+
+/* HEADER */
+
+header {
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(255,255,255,.75);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.8);
+  padding:14px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.logo {
+  font-size:25px;
+  font-weight:800;
+  color:var(--deep);
+  letter-spacing:-1px;
+  text-shadow:0 0 15px #ffacd0;
+  text-decoration:none;
+}
+
+.logo span {
+  font-family:'Alex Brush',cursive;
+  font-size:30px;
+}
+
+nav {
+  display:flex;
+  gap:22px;
+}
+
+nav a {
+  text-decoration:none;
+  color:var(--text);
+  font-size:12px;
+  font-weight:600;
+  transition:.3s;
+}
+
+nav a:hover {
+  color:var(--deep);
+}
+
+.socials {
+  display:flex;
+  gap:15px;
+}
+
+.socials a {
+  color:var(--deep);
+  font-size:19px;
+  transition:.3s;
+}
+
+.socials a:hover {
+  transform:translateY(-5px);
+  color:#a51e60;
+}
+
+/* PAGE HERO */
+
+.container {
+  width:90%;
+  max-width:950px;
+  margin:auto;
+}
+
+.hero {
+  margin-top:45px;
+  padding:65px 25px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  border-radius:28px;
+
+  background:
+  linear-gradient(135deg,
+  rgba(255,255,255,.85),
+  rgba(255,226,239,.7));
+
+  backdrop-filter:blur(20px);
+  border:1px solid white;
+
+  box-shadow:0 20px 50px rgba(210,70,135,.15);
+}
+
+.hero::before {
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  background:#ff9dc5;
+  filter:blur(90px);
+  top:-80px;
+  left:10%;
+}
+
+.hero h1 {
+  position:relative;
+  font-size:clamp(30px,6vw,48px);
+  color:var(--deep);
+  text-shadow:0 0 20px #ffacd0;
+}
+
+.hero .script {
+  position:relative;
+  font-family:'Alex Brush',cursive;
+  font-size:35px;
+  color:#ef7aab;
+  margin-top:5px;
+}
+
+.hero p {
+  position:relative;
+  color:var(--muted);
+  font-size:12px;
+  margin-top:15px;
+}
+
+.date {
+  display:inline-block;
+  margin-top:20px;
+  background:#ffe1ed;
+  color:#bd3975;
+  padding:8px 17px;
+  border-radius:25px;
+  font-size:11px;
+}
+
+/* CONTENT CARD */
+
+.disclosure-card {
+  margin:35px auto 60px;
+  padding:clamp(22px,5vw,48px);
+  border-radius:25px;
+
+  background:rgba(255,255,255,.69);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+
+  border:1px solid rgba(255,255,255,.9);
+
+  box-shadow:
+  0 15px 45px rgba(197,79,133,.12);
+}
+
+/* INTRO */
+
+.intro {
+  font-size:14px;
+  line-height:2;
+  color:#79566a;
+  margin-bottom:30px;
+}
+
+/* SECTIONS */
+
+.policy-section {
+  margin-bottom:30px;
+  padding-bottom:25px;
+  border-bottom:1px solid #f8dce9;
+}
+
+.policy-section:last-of-type {
+  border-bottom:none;
+}
+
+.policy-section h2 {
+  font-size:18px;
+  color:#d83f87;
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.policy-section h2 span {
+  width:32px;
+  height:32px;
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:11px;
+
+  background:linear-gradient(135deg,#ffb1d0,#ffe4ef);
+
+  color:#c52c72;
+  font-size:13px;
+  box-shadow:0 5px 15px #e77cab30;
+}
+
+.policy-section p {
+  font-size:13px;
+  line-height:2;
+  color:#795f70;
+  margin-bottom:10px;
+}
+
+/* CONTACT BOX */
+
+.contact-box {
+  margin-top:20px;
+  padding:25px;
+  border-radius:18px;
+
+  background:linear-gradient(
+  135deg,
+  rgba(255,225,239,.9),
+  rgba(255,255,255,.8)
+  );
+
+  border:1px solid white;
+  box-shadow:0 10px 30px #e77cab20;
+}
+
+.contact-box h2 {
+  font-size:19px;
+  color:var(--deep);
+  margin-bottom:12px;
+}
+
+.contact-box p {
+  font-size:13px;
+  line-height:2;
+  color:#79566a;
+}
+
+.contact-box a {
+  color:#d83f87;
+  text-decoration:none;
+  font-weight:600;
+  overflow-wrap:anywhere;
+}
+
+.contact-box a:hover {
+  text-decoration:underline;
+}
+
+/* CLOSING */
+
+.closing {
+  text-align:center;
+  margin-top:35px;
+  padding:25px;
+  border-radius:18px;
+  background:rgba(255,225,239,.5);
+}
+
+.closing p {
+  color:#875d73;
+  font-size:13px;
+  line-height:2;
+}
+
+.closing .script {
+  font-family:'Alex Brush',cursive;
+  color:#ed70a7;
+  font-size:31px;
+  margin-top:10px;
+}
+
+/* FOOTER */
+
+footer {
+  padding:45px 5%;
+  text-align:center;
+  background:rgba(255,255,255,.7);
+  backdrop-filter:blur(20px);
+  border-top:1px solid white;
+}
+
+.footer-logo {
+  font-size:34px;
+  font-weight:800;
+  color:var(--deep);
+}
+
+.footer-script {
+  font-family:'Alex Brush',cursive;
+  font-size:29px;
+  color:#ef7aab;
+}
+
+.footer-links {
+  margin:22px 0;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:22px;
+}
+
+.footer-links a {
+  text-decoration:none;
+  color:#80556c;
+  font-size:12px;
+}
+
+.footer-links a:hover {
+  color:var(--deep);
+}
+
+footer p {
+  font-size:11px;
+  color:#a17b90;
+  margin-top:12px;
+}
+
+footer .socials {
+  justify-content:center;
+  margin:20px;
+}
+
+/* FLOATING PARTICLES */
+
+.snow {
+  position:fixed;
+  top:-15px;
+  z-index:10;
+  pointer-events:none;
+  color:white;
+  text-shadow:0 0 8px #ff65a9;
+  animation:fall linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform:translateY(110vh) rotate(360deg);
+  }
+}
+
+.sparkle {
+  position:fixed;
+  z-index:9;
+  pointer-events:none;
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:white;
+  box-shadow:0 0 10px 3px #ff83b8;
+  animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  from {
+    opacity:.15;
+    transform:scale(.5);
+  }
+  to {
+    opacity:1;
+    transform:scale(1.5);
+  }
+}
+
+/* BOTTOM SMOKE */
+
+.smoke {
+  position:fixed;
+  bottom:-100px;
+  width:300px;
+  height:250px;
+  border-radius:50%;
+  background:radial-gradient(
+    ellipse,
+    rgba(255,153,194,.3),
+    transparent 70%
+  );
+  filter:blur(35px);
+  z-index:-1;
+  pointer-events:none;
+  animation:smokeMove 8s infinite alternate ease-in-out;
+}
+
+.smoke.left {left:-100px;}
+.smoke.right {right:-100px;animation-delay:2s;}
+
+@keyframes smokeMove {
+  from {
+    transform:translate(0,0) scale(1);
+  }
+  to {
+    transform:translate(70px,-70px) scale(1.5);
+  }
+}
+
+/* MOBILE */
+
+@media(max-width:750px) {
+  header {
+    flex-wrap:wrap;
+    padding:12px 5%;
+  }
+
+  .logo {font-size:21px;}
+
+  nav {
+    order:3;
+    width:100%;
+    justify-content:center;
+    gap:17px;
+  }
+
+  nav a {font-size:11px;}
+
+  .socials {gap:12px;}
+
+  .hero {
+    margin-top:25px;
+    padding:45px 18px;
+  }
+
+  .disclosure-card {
+    margin-top:22px;
+  }
+
+  .policy-section h2 {
+    font-size:16px;
+  }
+
+  .policy-section p,
+  .intro {
+    font-size:12px;
+  }
+}
+
+@media(max-width:380px) {
+  nav {gap:10px;}
+  nav a {font-size:10px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<div class="mesh one"></div>
+<div class="mesh two"></div>
+<div class="mesh three"></div>
+
+<div class="smoke left"></div>
+<div class="smoke right"></div>
+
+<!-- HEADER -->
+
+<header>
+
+  <a href="index.html" class="logo">
+    Sauce<span>Giver.</span>
+  </a>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="index.html#blogs">Blogs</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+
+  <div class="socials">
+
+    <a href="YOUR_FACEBOOK_URL"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Facebook">
+      <i class="fab fa-facebook"></i>
+    </a>
+
+    <a href="YOUR_PINTEREST_URL"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Pinterest">
+      <i class="fab fa-pinterest"></i>
+    </a>
+
+    <a href="YOUR_INSTAGRAM_URL"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Instagram">
+      <i class="fab fa-instagram"></i>
+    </a>
+
+  </div>
+
+</header>
+
+<main class="container">
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <h1>Affiliate Disclosure</h1>
+
+    <div class="script">
+      Transparency & Honesty
+    </div>
+
+    <p>Understanding how affiliate links support SauceGiver.</p>
+
+    <div class="date">
+      <i class="far fa-calendar"></i>
+      Last Updated: November 27, 2026
+    </div>
+
+  </section>
+
+  <!-- POLICY CONTENT -->
+
+  <article class="disclosure-card">
+
+    <p class="intro">
+      At SauceGiver, we believe in transparency and honesty
+      with our readers. This Affiliate Disclosure explains
+      how affiliate links work on our website and how we may
+      earn revenue when you interact with certain product links.
+    </p>
+
+    <section class="policy-section">
+
+      <h2>
+        <span>01</span>
+        What Are Affiliate Links?
+      </h2>
+
+      <p>
+        Some of the products featured on our website,
+        including fashion outfits, nightwear, clothing,
+        footwear, bags, jewellery, and other accessories,
+        may contain affiliate links.
+      </p>
+
+      <p>
+        Affiliate links are special tracking links that
+        allow us to earn a commission when visitors click
+        on those links and make qualifying purchases through
+        participating retailers.
+      </p>
+
+      <p>
+        This means that when you purchase a product through
+        certain links on our website, we may receive a small
+        commission from the retailer at no additional cost
+        to you.
+      </p>
+
+    </section>
+
+    <section class="policy-section">
+
+      <h2>
+        <span>02</span>
+        How We Earn Commissions
+      </h2>
+
+      <p>
+        Our website showcases fashion products from various
+        third-party retailers and online shopping platforms.
+      </p>
+
+      <p>
+        Some of these retailers operate affiliate marketing
+        programmes. When you visit their websites through our
+        affiliate links and complete an eligible purchase,
+        we may earn a commission.
+      </p>
+
+      <p>
+        However, not every product or link featured on our
+        website is an affiliate link. Some links may direct
+        you to third-party websites without generating any
+        commission for us.
+      </p>
+
+    </section>
+
+    <section class="policy-section">
+
+      <h2>
+        <span>03</span>
+        No Additional Cost to You
+      </h2>
+
+      <p>
+        Purchasing through an affiliate link does not
+        increase the price you pay for a product.
+      </p>
+
+      <p>
+        The commission, if applicable, is paid by the
+        retailer or affiliate programme, not added to your
+        purchase price.
+      </p>
+
+      <p>
+        Product prices, shipping charges, taxes, discounts,
+        and other purchasing conditions are determined by
+        the respective retailer.
+      </p>
+
+    </section>
+
+    <section class="policy-section">
+
+      <h2>
+        <span>04</span>
+        Product Information and Availability
+      </h2>
+
+      <p>
+        We showcase products from different retailers to
+        help visitors discover fashion inspiration, clothing
+        styles, nightwear, and accessories.
+      </p>
+
+      <p>
+        Product descriptions, images, prices, sizes,
+        availability, shipping information, and return
+        policies may change over time.
+      </p>
+
+      <p>
+        We encourage visitors to verify all relevant product
+        details directly on the retailer's website before
+        making a purchase.
+      </p>
+
+      <p>
+        We are not responsible for changes made by
+        third-party retailers after products are featured
+        on our website.
+      </p>
+
+    </section>
+
+    <section class="policy-section">
+
+      <h2>
+        <span>05</span>
+        Our Editorial Independence
+      </h2>
+
+      <p>
+        Our goal is to showcase fashion products and help
+        visitors discover styles that match their interests.
+      </p>
+
+      <p>
+        The presence of an affiliate link does not
+        automatically mean that a product is the best choice
+        or that we personally endorse every aspect of it.
+      </p>
+
+      <p>
+        We aim to present products and recommendations
+        honestly. Affiliate commissions do not guarantee
+        positive coverage or favourable placement.
+      </p>
+
+    </section>
+
+    <section class="policy-section">
+
+      <h2>
+        <span>06</span>
+        Third-Party Websites
+      </h2>
+
+      <p>
+        When you click a product link on our website, you
+        may be redirected to an external retailer or shopping
+        platform.
+      </p>
+
+      <p>
+        These third-party websites operate independently
+        and have their own privacy policies, terms of service,
+        payment procedures, shipping policies, and return
+        conditions.
+      </p>
+
+      <p>
+        We do not control their websites, transactions,
+        products, or customer service.
+      </p>
+
+      <p>
+        Please review the applicable policies of the
+        retailer before completing a purchase.
+      </p>
+
+    </section>
+
+    <section class="policy-section">
+
+      <h2>
+        <span>07</span>
+        Your Support
+      </h2>
+
+      <p>
+        When you purchase through our affiliate links,
+        you help support the operation and development
+        of this website.
+      </p>
+
+      <p>
+        Your support allows us to continue discovering
+        fashion products, publishing content, and improving
+        the experience we provide to our visitors.
+      </p>
+
+      <p>
+        We genuinely appreciate your trust and support.
+      </p>
+
+    </section>
+
+    <!-- CONTACT -->
+
+    <section class="contact-box">
+
+      <h2>
+        <i class="far fa-envelope"></i>
+        08. Contact Us
+      </h2>
+
+      <p>
+        If you have any questions about this Affiliate
+        Disclosure or our affiliate relationships, you can
+        contact us through our website's Contact page.
+      </p>
+
+      <p>
+        Website:
+        <a href="saucegiver.surf">
+          saucegiver.surf
+        </a>
+      </p>
+
+      <p>
+        Email:
+        <a href="mailto:YOUR_EMAIL@gmail.com">
+          saucegiver@gmail.com
+        </a>
+      </p>
+
+    </section>
+
+    <!-- CLOSING -->
+
+    <section class="closing">
+
+      <p>
+        Transparency matters to us. Thank you for visiting
+        SauceGiver and supporting our work.
+      </p>
+
+      <div class="script">
+        With love, SauceGiver ♡
+      </div>
+
+    </section>
+
+  </article>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+
+  <div class="footer-logo">
+    SauceGiver
+  </div>
+
+  <div class="footer-script">
+    A little something for everyone.
+  </div>
+
+  <div class="socials">
+
+    <a href="YOUR_FACEBOOK_URL" target="_blank"
+       rel="noopener noreferrer">
+      <i class="fab fa-facebook"></i>
+    </a>
+
+    <a href="YOUR_PINTEREST_URL" target="_blank"
+       rel="noopener noreferrer">
+      <i class="fab fa-pinterest"></i>
+    </a>
+
+    <a href="YOUR_INSTAGRAM_URL" target="_blank"
+       rel="noopener noreferrer">
+      <i class="fab fa-instagram"></i>
+    </a>
+
+  </div>
+
+  <div class="footer-links">
+
+    <a href="index.html">Home</a>
+
+    <a href="index.html#blogs">Blogs</a>
+
+    <a href="terms.html">Terms & Conditions</a>
+
+    <a href="disclosure.html">Affiliate Disclosure</a>
+
+    <a href="privacy.html">Privacy Policy</a>
+
+  </div>
+
+  <p>
+    Contact:
+    <a href="mailto:YOUR_EMAIL@gmail.com"
+       style="color:#e84991;">
+      YOUR_EMAIL@gmail.com
+    </a>
+  </p>
+
+  <p>
+    © 2026 SauceGiver. All rights reserved.
+  </p>
+
+</footer>
+
+<!-- ANIMATIONS -->
+
+<script>
+
+// SNOWFALL
+
+function createSnow() {
+
+  const snow = document.createElement('div');
+
+  snow.className = 'snow';
+  snow.innerHTML = '❄';
+
+  snow.style.left = Math.random()*100+'vw';
+
+  snow.style.fontSize =
+    (Math.random()*12+8)+'px';
+
+  snow.style.opacity = Math.random();
+
+  snow.style.animationDuration =
+    (Math.random()*8+5)+'s';
+
+  document.body.appendChild(snow);
+
+  setTimeout(() => snow.remove(),13000);
+}
+
+setInterval(createSnow,450);
+
+
+// GLITTER
+
+function createSparkle() {
+
+  const sparkle = document.createElement('div');
+
+  sparkle.className = 'sparkle';
+
+  sparkle.style.left =
+    Math.random()*100+'vw';
+
+  sparkle.style.top =
+    Math.random()*100+'vh';
+
+  sparkle.style.animationDelay =
+    Math.random()*2+'s';
+
+  document.body.appendChild(sparkle);
+
+  setTimeout(() => sparkle.remove(),4000);
+}
+
+setInterval(createSparkle,350);
+
+</script>
+
+</body>
+</html>
